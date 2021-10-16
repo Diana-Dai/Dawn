@@ -1,0 +1,74 @@
+.carousel-container {
+    width: 100%;
+}
+.carousel-container .carousel-wrapper .slide {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 1s linear;
+}
+.banner__media{
+    height: 100%;
+}
+.carousel-container .carousel-wrapper .slide.active{
+    opacity: 1;
+    transition: all 1s linear;
+}
+.carousel-container {
+    position: relative;
+    height: 100vh;
+}
+.carousel-container img {
+    display: block; /*取消图片右边的缝隙*/
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 50%;
+}
+
+.carousel-container .control-btn {
+    position: absolute;
+    top: 50%;
+    display: inline-block;
+    text-align: center;
+    width: 60px;
+    height: 60px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    cursor: pointer;
+    border-color: transparent;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+
+}
+.carousel-container .control-btn .icon{
+    width: 2rem;
+    height: 2rem;
+}
+.carousel-container .control-btn:hover {
+    background-color: rgba(0, 0, 0, 0.774);
+}
+.carousel-container .control-btn-prev {
+    transform: rotate(90deg);
+    left: 3rem;
+}
+.carousel-container .control-btn-prev .icon{
+    margin-bottom: -0.8rem;
+}
+.carousel-container .control-btn-next {
+    transform: rotate(-90deg);
+    right: 3rem;
+}
+
+.carousel-container .control-btn-next .icon{
+    margin-bottom: -0.4rem;
+}
+
+.banner__content{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+}

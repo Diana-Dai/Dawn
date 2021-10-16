@@ -1,0 +1,117 @@
+{{ 'section-slideshow.css' | asset_url | stylesheet_tag }}
+
+<div class="carousel-container">
+    <div class="carousel-wrapper">
+        {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+                <div class="slide">
+                    <div class="banner__media">
+                    <img
+                        srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+                        {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+                        {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+                        {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+                        {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+                        {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+                        {%- if block.settings.image.width >= 3000 -%}{{ block.settings.image | img_url: '3000x' }} 3000w,{%- endif -%}
+                        {%- if block.settings.image.width >= 3840 -%}{{ block.settings.image | img_url: '3840x' }} 3840w,{%- endif -%}
+                        {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+                        sizes="{% if block.settings.image != blank and section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif block.settings.image != blank %}50vw{% else %}100vw{% endif %}"
+                        src="{{ block.settings.image | img_url: '1500x' }}"
+                        loading="lazy"
+                        alt="{{ block.settings.image.alt | escape }}"
+                        width="{{ block.settings.image.width }}"
+                        height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"
+                        {% if block.settings.image != blank %}class="banner__media-image-half"{% endif %}
+                    >
+                    </div>
+                    <div class="page-width banner__content">
+                        <div class="banner__box">
+                            <h3>{{ block.settings.subtitle }}</h3>
+                            <h1>{{ block.settings.title }}</h1>
+                            <p>{{ block.settings.description }}</p>
+                            <a class="button" {% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} {% if block.settings.button_link == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_text | escape }}</a>
+                        </div>
+                    </div>
+                </div>
+            {%- endif -%}
+        {%- endfor -%}
+    </div>
+    <div class="control-btns page-width">
+		<button aria-label="prev" class="control-btn control-btn-prev">
+            {% render 'icon-arrow-2' %}
+		</button>
+		<button aria-label="next" class="control-btn control-btn-next">
+            {% render 'icon-arrow-2' %}
+		</button>
+    </div>
+  </div>
+<script async src="../assets/slideshow.js"></script>
+{% javascript %}
+document.querySelectorAll('.carousel-wrapper .slide')[0].classList.add('active');
+{% endjavascript %}
+{% schema %}
+{
+    "name":"slideshow",
+    "tag": "section",
+    "class": "spaced-section spaced-section--full-width",
+    "settings": [
+    ],  
+    "blocks":[
+    {
+        "type":"slideshow",
+        "name":"slideshow",
+        "limit":2,
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "image",
+                "label": "Image"
+            },
+            {
+                "type": "text",
+                "id": "subtitle",
+                "label": "Subtitle",
+                "default":"#stockieinterior"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "02. Gesten design studio"
+            },
+            {
+                "type": "text",
+                "id": "description",
+                "label": "Description",
+                "default": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture market business-to-business.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture market business-to-business."
+            },
+            {
+                "type": "text",
+                "id": "button_text",
+                "label": "Button Text",
+                "default":"Shop Now"
+            },
+            {
+                "type": "url",
+                "id": "button_link",
+                "label": "Button link"
+            }
+        ]
+    }
+    ],
+    "presets": [
+        {
+            "name":"slideshow",
+            "blocks": [
+            {
+              "type": "slideshow"
+            },
+            {
+              "type": "slideshow"
+            }
+          ]
+        }
+    ]
+}
+{% endschema %}
