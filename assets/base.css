@@ -1162,10 +1162,11 @@ deferred-media {
   align-items: center;
   box-sizing: border-box;
   font: inherit;
-  padding: 0.9rem 3rem 1.1rem;
+  font-weight: 500;
+  padding: 0.9rem 5.5rem 1.1rem;
   text-decoration: none;
   border: 0.1rem solid transparent;
-  border-radius: 0;
+  border-radius: 3px;
   background-color: rgba(var(--color-button), var(--alpha-button-background));
   box-shadow: 0 0 0 0.1rem rgba(var(--color-button), var(--alpha-button-border));
   color: rgb(var(--color-button-text));
@@ -2331,9 +2332,4 @@ details-disclosure > details {
   .icon-close-small path {
     stroke: CanvasText;
   }
-}
-
-
-#MainContent{
-  margin-top: -110px;
 }

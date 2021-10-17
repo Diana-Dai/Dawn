@@ -1,39 +1,54 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "163436110631c8711c": {
+      "type": "slideshow",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "163436110631c8711c-0": {
+          "type": "slideshow",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "medium"
+            "image": "shopify:\/\/shop_images\/empty-living-room-with-blue-sofa-plants-table-empty-white-wall-background-3d-rendering_1_1d981b84-df98-4108-82d1-04c445ce9cc3.jpg",
+            "subtitle": "#stockieinterior",
+            "title": "02. Gesten design studio",
+            "description": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture<strong> market business-to-business<\/strong>.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture <strong>market business-to-business<\/strong>.",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/all"
           }
         },
-        "button": {
-          "type": "buttons",
+        "163436110631c8711c-1": {
+          "type": "slideshow",
           "settings": {
-            "button_label_1": "All Products",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "image": "shopify:\/\/shop_images\/living-room-interior-loft-apartment-with-armchair-concrete-wall-3d-rendering_1.jpg",
+            "subtitle": "#stockieinterior",
+            "title": "02. Gesten design studio",
+            "description": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture market business-to-business.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture market business-to-business.",
+            "button_text": "Shop Now",
+            "button_link": "shopify:\/\/collections\/all"
+          }
+        },
+        "56281e43-c806-471d-a0c9-d6310fa4a561": {
+          "type": "location",
+          "settings": {
+            "country": "UK",
+            "city": "London",
+            "address": "this is my address"
+          }
+        },
+        "e944e02b-1403-4594-b64a-902591690d66": {
+          "type": "location",
+          "settings": {
+            "country": "DNK",
+            "city": "Copenhagen",
+            "address": "This is my address"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "163436110631c8711c-0",
+        "163436110631c8711c-1",
+        "56281e43-c806-471d-a0c9-d6310fa4a561",
+        "e944e02b-1403-4594-b64a-902591690d66"
       ],
       "settings": {
-        "adapt_height_first_image": false,
-        "desktop_text_box_position": "flex-end",
-        "show_text_box": true,
-        "image_overlay_opacity": 0,
-        "color_scheme": "background-1",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
       }
     },
     "rich_text": {
@@ -179,7 +194,7 @@
     }
   },
   "order": [
-    "image_banner",
+    "163436110631c8711c",
     "rich_text",
     "featured_products",
     "collage",

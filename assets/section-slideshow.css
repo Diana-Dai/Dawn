@@ -1,5 +1,6 @@
 .carousel-container {
     width: 100%;
+    margin-top: -110px;
 }
 .carousel-container .carousel-wrapper .slide {
     opacity: 0;
@@ -7,14 +8,14 @@
     top: 0;
     height: 100%;
     width: 100%;
-    transition: all 1s linear;
+    transition: all .2s linear;
 }
 .banner__media{
     height: 100%;
 }
 .carousel-container .carousel-wrapper .slide.active{
     opacity: 1;
-    transition: all 1s linear;
+    transition: all .2s linear;
 }
 .carousel-container {
     position: relative;
@@ -33,8 +34,8 @@
     top: 50%;
     display: inline-block;
     text-align: center;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     transform: translateY(-50%);
     border-radius: 50%;
     cursor: pointer;
@@ -68,7 +69,41 @@
 
 .banner__content{
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50%;
+    top: 25vh;
+    width: 60%;
 }
+
+.banner__address{
+    margin-top: 2.4rem;
+    display: flex;
+}
+
+.banner__address-content{
+    font-size: 1.5rem;
+    line-height: 0;
+    padding-right: 2rem;
+    border-top: 2px solid #797A7D;
+}
+
+.banner__address-content:last-child{
+    margin-left: 2rem;
+}
+
+.banner__address-city{
+    margin-top: 3rem;
+    font-weight: 600;
+}
+
+.banner__address-detail{
+    line-height: 1;
+}
+
+@media screen and (max-width: 989px) {
+    .carousel-container {
+        height: 75vh;
+    }
+    .banner__content{
+        width: 100%;
+        top: 15vh;
+    }
+  }

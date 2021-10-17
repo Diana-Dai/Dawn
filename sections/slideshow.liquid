@@ -1,4 +1,25 @@
 {{ 'section-slideshow.css' | asset_url | stylesheet_tag }}
+<style>
+h3 {
+    font-size: 1.8rem;
+}
+h1 {
+    font-size: 6rem;
+    font-weight: 500;
+    line-height: 1;
+    margin: 0 0;
+}
+
+@media screen and (max-width: 989px) {
+    h3 {
+    font-size: 1.2rem;
+}
+    h1 {
+        font-size: 4rem;
+    }
+
+  }
+</style>
 
 <div class="carousel-container">
     <div class="carousel-wrapper">
@@ -30,7 +51,18 @@
                             <h3>{{ block.settings.subtitle }}</h3>
                             <h1>{{ block.settings.title }}</h1>
                             <p>{{ block.settings.description }}</p>
-                            <a class="button" {% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} {% if block.settings.button_link == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_text | escape }}</a>
+                            <a class="button" {% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% endif %} {% if block.settings.button_link == blank %} href="/collections/all"{% endif %}>{{ block.settings.button_text | escape }}</a>
+                        </div>
+                        <div class="banner__address">
+                            {%- for block in section.blocks -%}
+                                {%- case block.type -%}
+                                    {%- when 'location' -%}
+                                        <div class="banner__address-content">
+                                            <p class="banner__address-city"><span>{%- if block.settings.city != blank -%} {{ block.settings.city }},  &nbsp;{%- endif -%}</span>  {%- if block.settings.country != blank -%} {{ block.settings.country }} {%- endif -%}</p>
+                                            <p class="banner__address-detail">{%- if block.settings.address != blank -%} {{ block.settings.address }} {%- endif -%}</p>
+                                        </div>
+                                {%- endcase -%}
+                            {%- endfor -%}
                         </div>
                     </div>
                 </div>
@@ -95,7 +127,30 @@ document.querySelectorAll('.carousel-wrapper .slide')[0].classList.add('active')
             {
                 "type": "url",
                 "id": "button_link",
-                "label": "Button link"
+                "label": "Button link",
+                "default": "/collections/all"
+            }
+        ]
+    },
+    {
+        "type":"location",
+        "name":"location",
+        "limit":2,
+        "settings": [
+            {
+                "type": "text",
+                "id": "country",
+                "label": "Country"
+            },
+            {
+                "type": "text",
+                "id": "city",
+                "label": "City"
+            },
+            {
+                "type": "text",
+                "id": "address",
+                "label": "Address"
             }
         ]
     }
@@ -109,6 +164,12 @@ document.querySelectorAll('.carousel-wrapper .slide')[0].classList.add('active')
             },
             {
               "type": "slideshow"
+            },
+            {
+                "type": "location"
+            },
+            {
+                "type": "location"
             }
           ]
         }

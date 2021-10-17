@@ -13,14 +13,6 @@
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
-          "announcement-bar-0": {
-            "type": "announcement",
-            "settings": {
-              "text": "Welcome to our store",
-              "color_scheme": "background-1",
-              "link": ""
-            }
-          },
           "9b3bb064-f000-4696-9839-e93514c7b0c6": {
             "type": "announcement",
             "disabled": true,
@@ -32,7 +24,6 @@
           }
         },
         "block_order": [
-          "announcement-bar-0",
           "9b3bb064-f000-4696-9839-e93514c7b0c6"
         ],
         "settings": {
