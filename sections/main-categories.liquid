@@ -1,0 +1,124 @@
+
+<div class="categories-section">
+  {%- for block in section.blocks -%}
+  {% case block.type %}
+    {% when 'category' %}
+      <div class="categories__category">
+        <div class="categories__category-body">
+          <h5>01. {{ forloop.index }}</h5>
+        </div>
+
+      </div>
+      
+  {% endcase %}
+
+  {%- endfor -%}
+</div>
+
+
+
+
+{% schema %}
+{
+    "name": "categories",
+    "class": "categories",
+    "settings": [
+    ],
+    "blocks":[
+      {
+        "type": "category",
+        "name":"category",
+        "limit": 3,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "subtitle",
+            "default": "Subtitle",
+            "label": "Subtitle"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "default": "Title",
+            "label": "Title"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Button text",
+            "default": "Shop the Category"
+          }
+        ]
+      },
+      {
+        "type": "about",
+        "name":"about",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "discount",
+            "label": "Discount info"
+          },
+          {
+            "type": "text",
+            "id": "join_us",
+            "label": "Join us"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "default": "Title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "body",
+            "default": "Body",
+            "label": "Body"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Button link"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Button text",
+            "default": "Shop the Category"
+          }
+        ]
+      }
+    ],
+    "presets": [
+        {
+            "name":"Categories",
+            "blocks":[
+                {
+                    "type": "category"
+                },
+                {
+                    "type": "about"
+                },
+                {
+                    "type": "category"
+                },
+                {
+                    "type": "category"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

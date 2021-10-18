@@ -1817,14 +1817,17 @@ input[type='checkbox'] {
 .shopify-section-header-sticky {
   position: sticky;
   top: 0;
+  background-color: #fff;
+  transform: translate3d(0, -15px, 0);
+  opacity: 0;
 }
-
-.shopify-section-header-hidden {
-  transform: translateY(-100%);
+.shopify-section-header-sticky.show{
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
 }
 
 #shopify-section-header.animate {
-  transition: transform 0.15s ease-out;
+  transition: all 0.15s ease-out;
 }
 
 /* Main Header Layout */
@@ -1850,8 +1853,8 @@ input[type='checkbox'] {
 
 @media screen and (min-width: 990px) {
   .header {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 
   .header--has-menu:not(.header--middle-left) {
