@@ -1,12 +1,12 @@
 {{ 'main-service.css' | asset_url | stylesheet_tag }}
 
-<div class="services">
+<div class="services page-width">
     <div class="services-item">
       <div class="services-item-icon">
           {% render "icon-shipping" %}
       </div>
       <div class="services-item-body">
-          <h5>Free Shipping</h5>
+          <h4>Free Shipping</h4>
           <p>Free shipping on orders over $65. </p>
       </div>
     </div>
@@ -15,9 +15,9 @@
         {% render "icon-returns" %}
       </div>
       <div class="services-item-body">
-          <h5>
+          <h4>
             Free returns
-            </h5>
+            </h4>
           <p> 30-days free return policy.  </p>
       </div>
     </div>
@@ -26,9 +26,9 @@
         {% render "icon-payments" %}
       </div>
       <div class="services-item-body">
-          <h5>
+          <h4>
             Secured payments
-            </h5>
+            </h4>
           <p> We accept all major credit cards. </p>
       </div>
     </div>
@@ -37,9 +37,9 @@
         {% render "icon-service" %}
       </div>
       <div class="services-item-body">
-          <h5>
+          <h4>
             Customer service
-            </h5>
+            </h4>
           <p> Top notch customer setvice. </p>
       </div>
     </div>
@@ -53,6 +53,11 @@
 {
   "name":"Services",
   "tag": "section",
-  "class": "services-section"
+  "class": "services-section",
+  "presets": [
+    {
+      "name":"Services"
+    }
+  ]
 }
 {% endschema %}

@@ -25,7 +25,7 @@ h1 {
     <div class="carousel-wrapper">
         {%- for block in section.blocks -%}
             {%- if block.settings.image != blank -%}
-                <div class="slide">
+                <div class="slide {% if forloop.first == true%} active {% endif %}">
                     <div class="banner__media">
                     <img
                         srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
@@ -79,9 +79,7 @@ h1 {
     </div>
   </div>
 <script async src="../assets/slideshow.js"></script>
-{% javascript %}
-document.querySelectorAll('.carousel-wrapper .slide')[0].classList.add('active');
-{% endjavascript %}
+
 {% schema %}
 {
     "name":"slideshow",

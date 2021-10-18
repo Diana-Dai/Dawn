@@ -1,20 +1,38 @@
 .services,
 .services-item{
     display: flex;
-    align-items: center;
-    justify-items: center;
+    align-items: flex-start;
 }
 .services{
-    padding-bottom: 3rem;
+    padding-bottom: 5rem;
 }
 .services-item{
-    padding-top: 3rem;
+    flex: 1 1 0;
+    padding-top: 5rem;
+    margin-right: 3rem;
 }
-
-
-@media screen and (max-width: 990px) {
+.services-item:last-child{
+    margin-right: 0;
+}
+.services-item-icon{
+    width: 50px;
+    margin-right: 1rem;
+}
+.services-item-body h4, 
+.services-item-body p{
+    margin: 0;
+    line-height: 1;
+}
+.services-item-body h4{
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+@media screen and (max-width: 750px) {
     .services{
         display: block;
+    }
+    .services-item-icon{
+        width: 30px;
     }
 }
 
