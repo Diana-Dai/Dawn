@@ -1,0 +1,58 @@
+{{ 'main-service.css' | asset_url | stylesheet_tag }}
+
+<div class="services">
+    <div class="services-item">
+      <div class="services-item-icon">
+          {% render "icon-shipping" %}
+      </div>
+      <div class="services-item-body">
+          <h5>Free Shipping</h5>
+          <p>Free shipping on orders over $65. </p>
+      </div>
+    </div>
+    <div class="services-item">
+      <div class="services-item-icon">
+        {% render "icon-returns" %}
+      </div>
+      <div class="services-item-body">
+          <h5>
+            Free returns
+            </h5>
+          <p> 30-days free return policy.  </p>
+      </div>
+    </div>
+    <div class="services-item">
+      <div class="services-item-icon">
+        {% render "icon-payments" %}
+      </div>
+      <div class="services-item-body">
+          <h5>
+            Secured payments
+            </h5>
+          <p> We accept all major credit cards. </p>
+      </div>
+    </div>
+    <div class="services-item">
+      <div class="services-item-icon">
+        {% render "icon-service" %}
+      </div>
+      <div class="services-item-body">
+          <h5>
+            Customer service
+            </h5>
+          <p> Top notch customer setvice. </p>
+      </div>
+    </div>
+</div>
+
+<div>
+
+</div>
+
+{% schema %}
+{
+  "name":"Services",
+  "tag": "section",
+  "class": "services-section"
+}
+{% endschema %}

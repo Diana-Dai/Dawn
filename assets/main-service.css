@@ -1,0 +1,20 @@
+.services,
+.services-item{
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+.services{
+    padding-bottom: 3rem;
+}
+.services-item{
+    padding-top: 3rem;
+}
+
+
+@media screen and (max-width: 990px) {
+    .services{
+        display: block;
+    }
+}
+
