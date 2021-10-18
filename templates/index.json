@@ -55,10 +55,65 @@
       "type": "main-service",
       "settings": {
       }
+    },
+    "1634544258ef473cfe": {
+      "type": "main-categories",
+      "blocks": {
+        "1634544258ef473cfe-0": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st_demo5_004-min_7b9fa896-76cd-4653-9123-33cf84060bd2.jpg",
+            "subtitle": "Hand picked",
+            "title": "Living room essentials",
+            "link": "shopify:\/\/collections\/furniture-home-accessories",
+            "text": "Shop the Category"
+          }
+        },
+        "1634544258ef473cfe-1": {
+          "type": "about",
+          "settings": {
+            "discount": "Earn 10% Back in Rewards",
+            "join_us": "Join our free loyalty program",
+            "title": "Curious about the future of design at Stockie?",
+            "body": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture",
+            "link": "shopify:\/\/pages\/about-us",
+            "text": "Learn More"
+          }
+        },
+        "1634544258ef473cfe-2": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st_demo5_002-min.jpg",
+            "subtitle": "Kitchen essentials",
+            "title": "Kitchen utensils and gadgets",
+            "link": "shopify:\/\/collections\/kitchen-tableware",
+            "text": "Shop the Category"
+          }
+        },
+        "1634544258ef473cfe-3": {
+          "type": "category",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st_demo5_003-min.jpg",
+            "subtitle": "Lamps and Pendants",
+            "title": "FW 2019 limited edition",
+            "link": "shopify:\/\/collections\/fw-2018-limited-edition",
+            "text": "Shop the Category"
+          }
+        }
+      },
+      "block_order": [
+        "1634544258ef473cfe-0",
+        "1634544258ef473cfe-1",
+        "1634544258ef473cfe-2",
+        "1634544258ef473cfe-3"
+      ],
+      "settings": {
+      }
     }
   },
   "order": [
     "163436110631c8711c",
-    "1634543623866ff911"
+    "1634543623866ff911",
+    "1634544258ef473cfe"
   ]
 }
