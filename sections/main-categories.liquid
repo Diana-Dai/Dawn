@@ -5,7 +5,7 @@
   {% case block.type %}
     {% when 'category' %}
       <div class="categories__category categories__category-{{ forloop.index }}">
-        <div class="categories__category-left">
+        <div class="categories__category-left background-image-wrapper">
           <img
           srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
             {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
@@ -54,6 +54,7 @@
 {
     "name": "categories",
     "class": "categories",
+    "tag":"section",
     "settings": [
     ],
     "blocks":[

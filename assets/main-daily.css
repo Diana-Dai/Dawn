@@ -1,4 +1,8 @@
-.main-inspiration{
+h3{
+    font-size: 2.3rem;
+    font-weight: bold;
+}
+.inspiration__banner-wrapper{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -16,6 +20,7 @@
 .inspiration__banner .inspiration__banner-background{
     width: 100%;
     z-index: 0;
+    font-size: 0;
 }
 .inspiration__banner img{
     width: 100%;
@@ -25,27 +30,46 @@
     position: absolute;
     top: 1rem;
     bottom: 0;
+    z-index: 1;
+}
+.inspiration__banner-body > div{
+    height: 100%;
+    padding: 4rem;    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 1;
-    padding: 4rem;
 }
 .inspiration__banner-body h3,
 .inspiration__banner-body span{
-    font-weight: bold;
     color: rgb(var(--color-foreground));
 }
 .inspiration__banner-body p{
     line-height: 1;
     margin-top: 1rem;
 }
+.inspiration__banner-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.inspiration__banner-title h3{
+    font-size: 2rem;
+    font-weight: bold;
+}
 @media screen and (max-width: 900px) {
+    .inspiration__banner-wrapper{
+        margin: 0;
+    }
     .inspiration__banner{
+        margin: 1.5rem 0;
+        padding: 0;
         width: 100%;
     }
-    .inspiration__banner-body{
+    .inspiration__banner-body > div{
         padding: 2rem;
+    }
+    .inspiration__banner-title{
+        display: block;
     }
 }
 
@@ -55,4 +79,8 @@
 
 .inspiration__banner-body .shop-now-link:hover{
     color: #000;
+}
+
+.inspiration__banner:hover img{
+    transform: scale(1.04);
 }

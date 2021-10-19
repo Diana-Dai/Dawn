@@ -4,39 +4,44 @@
     <div class="inspiration__banner-title">
       <h3>{{ section.settings.title }}</h3>
       <div>
-        <a class="shop-now-link link link--text focus-inset" href="{{ section.settings.link }}">{{ block.settings.button_text }}
+        <a class="shop-now-link link link--text focus-inset" href="{{ section.settings.link }}">{{ section.settings.button_text }}
           <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
         </a> 
       </div>
     </div>
-    {%- for block in section.blocks -%}
-    <div class="inspiration__banner">
-        <div class="inspiration__banner-background">
-            <img
-            srcset="{%- if block.settings.background.width >= 375 -%}{{ block.settings.background | img_url: '375x' }} 375w,{%- endif -%}
-              {%- if block.settings.background.width >= 750 -%}{{ block.settings.background | img_url: '750x' }} 750w,{%- endif -%}
-              {{ block.settings.background | img_url: 'master' }} {{ block.settings.background.width }}w"
-            src="{{ block.settings.background | img_url: '780x' }}"
-            loading="lazy"
-            alt="{{ block.settings.background.alt | escape }}"
-            width="{{ block.settings.background.width }}"
-            height="{{ block.settings.background.height }}"
-          >
-        </div>
-        <div class="inspiration__banner-body">
-            <div class="inspiration__banner-body-top">
-              <h3> {{ block.settings.title }} </h3>
-              <p> {{ block.settings.body }}</p>
-              <span> {{ block.settings.sale }}</span>
-            </div>
-            <div>
-              <a class="shop-now-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.button_text }}
-                <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
-              </a> 
-            </div>
-        </div>
-    </div>
+    <div class="inspiration__banner-wrapper">
+      {%- for block in section.blocks -%}
+      <div class="inspiration__banner">
+          <div class="inspiration__banner-background background-image-wrapper">
+              <img
+              srcset="{%- if block.settings.background.width >= 375 -%}{{ block.settings.background | img_url: '375x' }} 375w,{%- endif -%}
+                {%- if block.settings.background.width >= 750 -%}{{ block.settings.background | img_url: '750x' }} 750w,{%- endif -%}
+                {{ block.settings.background | img_url: 'master' }} {{ block.settings.background.width }}w"
+              src="{{ block.settings.background | img_url: '780x' }}"
+              loading="lazy"
+              alt="{{ block.settings.background.alt | escape }}"
+              width="{{ block.settings.background.width }}"
+              height="{{ block.settings.background.height }}"
+            >
+          </div>
+          <div class="inspiration__banner-body">
+              <div>
+                <div class="inspiration__banner-body-top">
+                  <h3> {{ block.settings.title }} </h3>
+                  <p> {{ block.settings.body }}</p>
+                  <span> {{ block.settings.sale }}</span>
+                </div>
+                <div>
+                  <a class="shop-now-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.button_text }}
+                    <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
+                  </a> 
+                </div>
+              </div>
+          </div>
+      </div>
     {%- endfor -%}
+    </div>
+
 </div>
 
 
@@ -44,6 +49,7 @@
 {
     "name": "inspiration",
     "class": "inspiration",
+    "tag": "section",
     "settings": [
         {
             "type": "text",
@@ -60,7 +66,7 @@
         {
           "type": "url",
           "id":"link",
-          "label": "Button link",
+          "label": "Button link"
         }
     ],
     "blocks":[

@@ -2,6 +2,7 @@
 .services-item{
     display: flex;
     align-items: flex-start;
+    background-color: #fff;
 }
 .services{
     padding-bottom: 5rem;
