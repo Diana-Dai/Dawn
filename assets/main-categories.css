@@ -1,0 +1,163 @@
+.categories-section{
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #F8F8F8;
+}
+.categories__category{
+    overflow: hidden;
+    width: 50%;
+    display: flex;
+    align-items: stretch;
+    padding: 0 1.5rem;
+    margin: 1.5rem 0;
+}
+.categories__category-1 .categories__category-left{
+    order: 2;
+}
+.categories__category-left,
+.categories__category-right{
+    width: 50%;
+}
+.categories__category-right{
+    padding-left: 3rem;
+    padding-right: 4rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    background-color: #fff;
+}
+.categories__category img {
+    width: 100%;
+    height: 100%;
+    transition: 0.1s linear;
+}
+.categories__category:hover img{
+    transform: scale(1.04);
+}
+.categories__category h5{
+    text-transform: uppercase;
+    line-height: 3;
+    font-size: 1.2rem;
+}
+
+.categories__category h2 a{
+    display: inline;
+    font-weight: 600;
+    font-size: 2.8rem;
+}
+
+.categories__category .categories__category-link{
+    margin-top: 1.8rem;
+    font-weight: 600;
+}
+
+.categories__category-2 .categories__category-left{
+    background-color: #E7D8D6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 3rem;
+
+}
+
+.categories__category-2 .categories__category-right{
+    margin-right: 15px !important;
+    margin-left: 15px !important;
+    padding-right: 20px !important;
+    padding-left: 20px !important;
+    background-image: url(https://colabrio.ams3.cdn.digitaloceanspaces.com/stockie_landing/demo5/2019/02/st__demo5__decoration-1.svg?id=19043) !important;
+    background-position: 0 0 !important;
+    background-repeat: no-repeat !important;
+    background-color: transparent;
+}
+
+.categories__category-2 .categories__category-left h5{
+    font-weight: 500;
+}
+
+.categories__category-2 .categories__category-right p{
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 1rem 0;
+    font-size: 1.5rem;
+}
+.categories__category-2 .categories__category-right h3{
+    font-weight: 600;
+
+}
+@media screen and (max-width: 750px) {
+    .categories__category{
+        width: 100%;
+    }
+    
+}
+.categories__category-link {
+    display: inline-block;
+    position: relative;
+    transition: 0.1s linear;
+    line-height: 3rem;
+    overflow: hidden;
+}
+.categories__category-link::before{
+    content: '';
+    position: absolute;
+    width: 90%;
+    height: 2px;
+    bottom: -3px;
+    background-color: currentColor;
+    transition: 0.1s linear;
+    opacity: 0;
+}
+.categories__category-link:hover{
+    color: rgb(var(--color-base-accent-2));
+}
+.categories__category-link:hover:before{
+    opacity: 1;
+    width: 100%;
+}
+.categories__category-link:hover .icon-arrow{
+    animation: animation 0.5s ;
+}
+
+@keyframes animation {
+    0%{
+        transform: translateX(0);
+    }
+    33%{
+        transform: translateX(20px);
+        opacity: 0;
+    }
+    40%{
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    100%{
+        transform: translateX(0);
+
+    }
+}
+.categories__category-icon .icon-arrow{ 
+    width: 2.3rem;
+    vertical-align: middle;
+}
+
+.categories__category-2 .categories__category-right .categories__category-link{
+    background-color: #24262b;
+    color: white;
+    padding: 10px 18px;
+    line-height: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    transition: all cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+    border-radius: 4px;
+}
+.categories__category-2 .categories__category-right:hover .categories__category-link{
+    background-color: rgb(var(--color-base-accent-2));
+}
