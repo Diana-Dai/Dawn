@@ -1,4 +1,4 @@
-h3{
+.inspiration__banner h3{
     font-size: 2.3rem;
     font-weight: bold;
 }
@@ -47,16 +47,8 @@ h3{
     line-height: 1;
     margin-top: 1rem;
 }
-.inspiration__banner-title{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.inspiration__banner-title h3{
-    font-size: 2rem;
-    font-weight: bold;
-}
-@media screen and (max-width: 900px) {
+
+@media screen and (max-width: 750px) {
     .inspiration__banner-wrapper{
         margin: 0;
     }
@@ -68,9 +60,7 @@ h3{
     .inspiration__banner-body > div{
         padding: 2rem;
     }
-    .inspiration__banner-title{
-        display: block;
-    }
+
 }
 
 .inspiration__banner-body .shop-now-link{

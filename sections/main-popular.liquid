@@ -1,4 +1,4 @@
-{{ 'main-daily.css' | asset_url | stylesheet_tag }}
+{{ 'main-popular.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width main-inspiration">
     <div class="banner-title">
@@ -47,15 +47,14 @@
 
 {% schema %}
 {
-    "name": "inspiration",
-    "class": "inspiration",
+    "name": "Popular products",
     "tag": "section",
     "settings": [
         {
             "type": "text",
             "id":"title",
             "label": "Title",
-            "default": "Daily inspiration from Stockie®"
+            "default": "Most popular products"
         },
         {
           "type": "text",
@@ -69,60 +68,9 @@
           "label": "Button link"
         }
     ],
-    "blocks":[
-        {
-            "type": "banner",
-            "name": "banner",
-            "limit":2,
-            "settings": [
-                {
-                    "type": "image_picker",
-                    "id":"background",
-                    "label": "Background"
-                },
-                {
-                    "type": "text",
-                    "id":"title",
-                    "label": "Title",
-                    "default": "Make this year an iconic one" 
-                },
-                {
-                    "type": "text",
-                    "id":"body",
-                    "label": "Body",
-                    "default": "Sonderful density has taken possession " 
-                },
-                {
-                    "type": "text",
-                    "id":"sale",
-                    "label": "Sale",
-                    "default": "from $29.00" 
-                },
-                {
-                    "type": "url",
-                    "id":"link",
-                    "label": "Link"
-                },
-                {
-                    "type": "text",
-                    "id":"button_text",
-                    "label": "Button Text",
-                    "default": "Shop Product" 
-                }
-            ]
-        }
-    ],
     "presets": [
         {
-            "name":"inspiration",
-            "blocks":[
-                {
-                    "type": "banner"
-                },
-                {
-                    "type": "banner"
-                }
-            ]
+            "name":"Popular products"
         }
     ]
 }

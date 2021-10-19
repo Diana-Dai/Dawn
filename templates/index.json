@@ -141,7 +141,17 @@
         "163460351349208fcc-1"
       ],
       "settings": {
-        "title": "Daily inspiration from Stockie®"
+        "title": "Daily inspiration from Stockie®",
+        "button_text": "See all products",
+        "link": ""
+      }
+    },
+    "1634624187bf72a001": {
+      "type": "main-popular",
+      "settings": {
+        "title": "Most popular products",
+        "button_text": "See all products",
+        "link": ""
       }
     }
   },
@@ -149,6 +159,7 @@
     "163436110631c8711c",
     "1634543623866ff911",
     "1634544258ef473cfe",
-    "163460351349208fcc"
+    "163460351349208fcc",
+    "1634624187bf72a001"
   ]
 }

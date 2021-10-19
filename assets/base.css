@@ -2420,3 +2420,19 @@ details-disclosure > details {
 .background-image-wrapper:hover img{
   transform: scale(1.04);
 }
+
+.banner-title{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.banner-title h3{
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 750px) {
+  .banner-title{
+    display: block;
+}
+}
