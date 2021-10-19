@@ -1,0 +1,31 @@
+.main-popular .popular__carousel-wrapper{
+    display: flex;
+    margin:0 -1.5rem;
+
+}
+
+.main-popular .slide{
+    width: 33.3%;
+    padding: 1.5rem;
+}
+.main-popular .slide-image{
+    position: relative;
+}
+.main-popular .slide-image img{
+    width: 100%;
+    height: auto;
+}
+.main-popular .slide-image img:nth-child(2){
+    position: absolute;
+    top: 0;
+}
+
+.main-popular .shop-now-link{
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.main-popular .h5 a{
+    font-weight: 600 !important;
+
+}

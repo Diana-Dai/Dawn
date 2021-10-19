@@ -189,12 +189,6 @@
   margin-top: 0.4rem;
 }
 
-.card-information__wrapper
-  > *:not(.visually-hidden:first-child)
-  + *:not(.rating) {
-  margin-top: 0.7rem;
-}
-
 .card-information__wrapper .caption {
   letter-spacing: 0.07rem;
 }
@@ -259,9 +253,9 @@
 }
 
 .card__badge {
-  bottom: 1rem;
   display: flex;
   flex-wrap: wrap;
+  top: 1rem;
   left: 1rem;
   position: absolute;
 }
@@ -328,4 +322,10 @@
     background-color: rgba(var(--color-card-hover), 0.06);
     transition: background-color var(--duration-long) ease;
   }
+}
+
+.card-information__wrapper .shop-now-link{
+  font-weight: 500;
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
 }

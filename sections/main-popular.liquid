@@ -1,6 +1,8 @@
 {{ 'main-popular.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width main-inspiration">
+
+<div class="page-width main-popular">
     <div class="banner-title">
       <h3>{{ section.settings.title }}</h3>
       <div>
@@ -9,39 +11,35 @@
         </a> 
       </div>
     </div>
-    <div class="inspiration__banner-wrapper">
-      {%- for block in section.blocks -%}
-      <div class="inspiration__banner">
-          <div class="inspiration__banner-background background-image-wrapper">
-              <img
-              srcset="{%- if block.settings.background.width >= 375 -%}{{ block.settings.background | img_url: '375x' }} 375w,{%- endif -%}
-                {%- if block.settings.background.width >= 750 -%}{{ block.settings.background | img_url: '750x' }} 750w,{%- endif -%}
-                {{ block.settings.background | img_url: 'master' }} {{ block.settings.background.width }}w"
-              src="{{ block.settings.background | img_url: '780x' }}"
-              loading="lazy"
-              alt="{{ block.settings.background.alt | escape }}"
-              width="{{ block.settings.background.width }}"
-              height="{{ block.settings.background.height }}"
-            >
-          </div>
-          <div class="inspiration__banner-body">
-              <div>
-                <div class="inspiration__banner-body-top">
-                  <h3> {{ block.settings.title }} </h3>
-                  <p> {{ block.settings.body }}</p>
-                  <span> {{ block.settings.sale }}</span>
-                </div>
-                <div>
-                  <a class="shop-now-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.button_text }}
-                    <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
-                  </a> 
-                </div>
-              </div>
-          </div>
+      <div class="popular__carousel-container">
+        <div class="popular__carousel-wrapper">
+          {%- liquid
+          assign products = collections.all.products | sort: 'best-selling'
+          -%}
+          {% for product in products %}
+            <div class="slide">
+              {% render 'product-card',
+              product_card_product: product,
+              media_size: 'adapt',
+              show_category: section.settings.show_category,
+              show_secondary_image: section.settings.show_secondary_image,
+              add_image_padding: section.settings.add_image_padding,
+              show_vendor: section.settings.show_vendor,
+              show_image_outline: section.settings.show_image_outline,
+              show_rating: section.settings.show_rating
+              %}
+            </div>
+          {% endfor %}
+        </div> 
+        <div class="control-btns page-width">
+          <button aria-label="prev" class="control-btn control-btn-prev">
+                  {% render 'icon-arrow-2' %}
+          </button>
+          <button aria-label="next" class="control-btn control-btn-next">
+                  {% render 'icon-arrow-2' %}
+          </button>
+          </div> 
       </div>
-    {%- endfor -%}
-    </div>
-
 </div>
 
 
@@ -66,6 +64,43 @@
           "type": "url",
           "id":"link",
           "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_secondary_image",
+          "default": false,
+          "label": "Show secondary image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_category",
+          "default": true,
+          "label": "Show category"
+        },
+        {
+          "type": "checkbox",
+          "id": "add_image_padding",
+          "default": false,
+          "label": "Add image padding"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image_outline",
+          "default": true,
+          "label": "Show imageoutline"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "default": false,
+          "label": "Show vendor"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "default": false,
+          "label": "Show rating",
+          "info": "t:sections.featured-collection.settings.show_rating.info"
         }
     ],
     "presets": [

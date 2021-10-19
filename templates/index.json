@@ -151,7 +151,12 @@
       "settings": {
         "title": "Most popular products",
         "button_text": "See all products",
-        "link": ""
+        "link": "shopify:\/\/collections",
+        "show_secondary_image": true,
+        "add_image_padding": false,
+        "show_image_outline": true,
+        "show_vendor": false,
+        "show_rating": false
       }
     }
   },
