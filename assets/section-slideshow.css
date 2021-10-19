@@ -95,7 +95,7 @@
 }
 
 .banner__address-detail{
-    line-height: 1;
+    line-height: 3;
 }
 
 @media screen and (max-width: 989px) {

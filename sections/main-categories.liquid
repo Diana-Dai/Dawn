@@ -20,9 +20,9 @@
         <div class="categories__category-right">
           <h5>0{{ forloop.index }}.{{ block.settings.subtitle }}</h5>
           <div>
-            <h2><a class="categories__category-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.title }}</a></h2>
-            <a class="categories__category-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.text }}
-              <i class="categories__category-icon"> {% render 'icon-arrow-3' %}  </i>
+            <h2><a class="shop-now-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.title }}</a></h2>
+            <a class="shop-now-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.text }}
+              <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
             </a> 
           </div>
         </div>
@@ -37,14 +37,13 @@
         <h3>{{ block.settings.title }}</h3>
         <p>{{ block.settings.body }}</p>
         <div>
-          <a class="categories__category-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.text }}
-            <i class="categories__category-icon"> {% render 'icon-arrow-3' %}  </i>
+          <a class="shop-now-link link link--text focus-inset" href="{{ block.settings.link }}">{{ block.settings.text }}
+            <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
           </a> 
         </div>
       </div>
     </div>
   {% endcase %}
-
   {%- endfor -%}
 </div>
 

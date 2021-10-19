@@ -109,11 +109,46 @@
       ],
       "settings": {
       }
+    },
+    "163460351349208fcc": {
+      "type": "main-daily",
+      "blocks": {
+        "163460351349208fcc-0": {
+          "type": "banner",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/st_demo5_006-min.jpg",
+            "title": "Make this year an iconic one",
+            "body": "Sonderful density has taken possession",
+            "sale": "from $29.00",
+            "link": "shopify:\/\/collections",
+            "button_text": "Shop Product"
+          }
+        },
+        "163460351349208fcc-1": {
+          "type": "banner",
+          "settings": {
+            "background": "shopify:\/\/shop_images\/st_demo5_005-min.jpg",
+            "title": "Go back to collage",
+            "body": "Sonderful density has taken possession",
+            "sale": "from $29.00",
+            "link": "shopify:\/\/collections",
+            "button_text": "Shop Product"
+          }
+        }
+      },
+      "block_order": [
+        "163460351349208fcc-0",
+        "163460351349208fcc-1"
+      ],
+      "settings": {
+        "title": "Daily inspiration from Stockie®"
+      }
     }
   },
   "order": [
     "163436110631c8711c",
     "1634543623866ff911",
-    "1634544258ef473cfe"
+    "1634544258ef473cfe",
+    "163460351349208fcc"
   ]
 }
