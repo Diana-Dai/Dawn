@@ -1,0 +1,42 @@
+.main-popular .popular__carousel-wrapper{
+    display: flex;
+    margin:0 -1.5rem;
+    flex-wrap: nowrap;
+    /* transform: translateX(-33.3%); */
+}
+
+.main-popular .slide{
+    width: 50%;
+    padding: 1.5rem;
+}
+.main-popular .slide-image{
+    position: relative;
+}
+.main-popular .slide-image img{
+    width: 100%;
+    height: auto;
+}
+.main-popular .slide-image img:nth-child(2){
+    position: absolute;
+    top: 0;
+}
+
+.main-popular .shop-now-link{
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.main-popular .h5 a{
+    font-weight: 600 !important;
+
+}
+.popular__carousel-container{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap; /* important */
+    cursor: pointer;
+}
+.main-popular .control-btns{
+    top: 50% !important;
+}

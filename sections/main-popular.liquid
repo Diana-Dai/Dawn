@@ -1,0 +1,127 @@
+{{ 'main-popular.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'glide.core.min.css' | asset_url | stylesheet_tag }}
+
+
+<div class="page-width main-popular">
+    <div class="banner-title">
+      <h3>{{ section.settings.title }}</h3>
+      <div>
+        <a class="shop-now-link link link--text focus-inset" href="{{ section.settings.link }}">{{ section.settings.button_text }}
+          <i class="shop-now-icon"> {% render 'icon-arrow-3' %}  </i>
+        </a> 
+      </div>
+    </div>
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+          {%- liquid
+          assign products = collections.all.products | sort: 'best-selling'
+          -%}
+          {% for product in products %}
+            {% if forloop.index < 6 %}
+              <li class="glide__slide">
+                  {% render 'product-card',
+                  product_card_product: product,
+                  media_size: 'adapt',
+                  show_category: section.settings.show_category,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  add_image_padding: section.settings.add_image_padding,
+                  show_vendor: section.settings.show_vendor,
+                  show_image_outline: section.settings.show_image_outline,
+                  show_rating: section.settings.show_rating
+                  %}
+              </li>
+            {% endif %}
+          {% endfor %}
+          </ul>
+        </div> 
+        <div class="glide__arrows page-width" data-glide-el="controls">
+          <button class="glide__arrow s-control-btn control-btn-prev" data-glide-dir="<"> {% render 'icon-arrow-2' %}</button>
+          <button class="glide__arrow s-control-btn control-btn-next" data-glide-dir=">"> {% render 'icon-arrow-2' %}</button>
+        </div>
+</div>
+
+<script src="{{ 'glide.min.js' | asset_url }}"></script>
+
+<script defer>
+  var glide = new Glide('.glide', {
+    type:"carousel",
+    perView: 4,
+    gap: 30,
+    breakpoints: {
+      600: {
+        perView: 2
+      }
+  }
+  })
+  glide.mount()
+
+</script>
+{% schema %}
+{
+    "name": "Popular products",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "text",
+            "id":"title",
+            "label": "Title",
+            "default": "Most popular products"
+        },
+        {
+          "type": "text",
+          "id":"button_text",
+          "label": "Button Text",
+          "default": "See all products"
+        },
+        {
+          "type": "url",
+          "id":"link",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_secondary_image",
+          "default": false,
+          "label": "Show secondary image"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_category",
+          "default": true,
+          "label": "Show category"
+        },
+        {
+          "type": "checkbox",
+          "id": "add_image_padding",
+          "default": false,
+          "label": "Add image padding"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_image_outline",
+          "default": true,
+          "label": "Show imageoutline"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "default": false,
+          "label": "Show vendor"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_rating",
+          "default": false,
+          "label": "Show rating",
+          "info": "t:sections.featured-collection.settings.show_rating.info"
+        }
+    ],
+    "presets": [
+        {
+            "name":"Popular products"
+        }
+    ]
+}
+{% endschema %}

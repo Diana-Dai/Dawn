@@ -46,7 +46,7 @@
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
       :root {
-        --font-body-family: {{ settings.type_body_font.family }}, {{ settings.type_body_font.fallback_families }};
+        --font-body-family: "DM Sans", sans-serif;
         --font-body-style: {{ settings.type_body_font.style }};
         --font-body-weight: {{ settings.type_body_font.weight }};
 
@@ -93,14 +93,14 @@
         font-size: 1.5rem;
         letter-spacing: 0.06rem;
         line-height: 1.8;
-        font-family: var(--font-body-family);
+        font-family: "DM Sans", sans-serif;
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight);
       }
 
       @media screen and (min-width: 750px) {
         body {
-          font-size: 1.6rem;
+          font-size: 1.58rem;
         }
       }
     {% endstyle %}

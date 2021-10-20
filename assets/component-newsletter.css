@@ -11,7 +11,6 @@
   .newsletter-form {
     flex-direction: row;
     align-items: flex-start;
-    margin: 0 auto;
     max-width: 36rem;
   }
 }
@@ -22,6 +21,7 @@
 
 .newsletter-form__field-wrapper .field__input {
   padding-right: 5rem;
+  border:none;
 }
 
 .newsletter-form__message {
@@ -45,11 +45,29 @@
   }
 }
 
-.newsletter-form__button {
-  width: 4.4rem;
-  margin: 0;
+button.btn-primary{
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  border: none;
+  overflow: visible;
+  margin: auto;
+  height: 4.5rem;
+  border-radius: 0;
 }
 
-.newsletter-form__button .icon {
-  width: 1.5rem;
+.newsletter-form .field{
+  margin: 1.8rem 0;
+  display: block;
+}
+
+.newsletter-form .field__input{
+  box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.25) !important;
+  border-radius: 2px;
+}
+
+.newsletter small{
+  color: rgba(var(--color-foreground), 0.6) !important;
+  font-size: 1.4rem;
 }
