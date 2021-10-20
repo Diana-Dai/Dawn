@@ -256,7 +256,7 @@ body,
 .color-inverse,
 .color-accent-1,
 .color-accent-2 {
-  color: rgba(var(--color-foreground), 0.75);
+  color: rgb(var(--color-foreground));
   background-color: rgb(var(--color-background));
 }
 
@@ -297,6 +297,9 @@ body,
   display: none !important;
 }
 
+svg{
+   vertical-align: middle;
+}
 .visually-hidden {
   position: absolute !important;
   overflow: hidden;
@@ -385,13 +388,15 @@ h1,
 
 h2,
 .h2 {
-  font-size: 2rem;
+  font-size: 2.7rem;
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: 2.4rem;
+    font-size: 3.4rem;
   }
 }
 
@@ -814,7 +819,17 @@ summary::-webkit-details-marker {
 .title-wrapper-with-link {
   margin: 3rem 0 2rem;
 }
-
+.title,
+.subtitle{
+  font-family: -apple-system, BlinkMacSystemFont, "proxima_nova", Roboto, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.subtitle{
+  font-size: 1.6rem;
+  line-height: 1.6;
+  letter-spacing: 0.05rem;
+  color: rgba(var(--color-foreground), 0.9);
+  font-weight: 500;
+}
 .title-wrapper-with-link .title {
   margin: 0;
 }
@@ -854,11 +869,6 @@ summary::-webkit-details-marker {
 }
 
 @media screen and (min-width: 990px) {
-  .title,
-  .title-wrapper-with-link {
-    margin: 5rem 0 3rem;
-  }
-
   .title--primary {
     margin: 2rem 0;
   }
@@ -898,13 +908,6 @@ summary::-webkit-details-marker {
   .title-wrapper-with-link.title-wrapper-with-link--no-heading {
     display: none;
   }
-}
-
-.subtitle {
-  font-size: 1.8rem;
-  line-height: 1.8;
-  letter-spacing: 0.05rem;
-  color: rgba(var(--color-foreground), 0.7);
 }
 
 /* component-grid */
@@ -2443,33 +2446,41 @@ details-disclosure > details {
 
 /* Control button */
 .s-control-btn,
-.control-btn {
-  position: absolute;
-  top: 50%;
+.control-btn,
+.s-btn{
   display: inline-block;
   text-align: center;
   width: 50px;
   height: 50px;
-  transform: translateY(-50%);
   border-radius: 50%;
   cursor: pointer;
   border-color: transparent;
+  transition: 0.1s linear;
+}
+.s-control-btn,
+.control-btn {
+  position: absolute;
+  top: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
+.s-btn,
 .s-control-btn{
-  top: 30%;
   background-color: #fff;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
-  transition: 0.1s linear;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
   color: #000;
 }
+
+.s-control-btn{
+  top: 30%;
+}
+.s-btn .icon,
 .s-control-btn .icon,
 .control-btn .icon{
   width: 2rem;
   height: 2rem;
 }
-
+.s-btn:hover,
 .s-control-btn:hover{
   color: rgb(var(--color-base-accent-2));
   box-shadow: 0px 0px 0px 10px #d1d1d148;

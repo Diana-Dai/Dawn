@@ -25,7 +25,7 @@
       {%- endif -%}
       {%- if show_category -%}
       {% for collection in product_card_product.collections %}
-        <a href="{{ collection.url | default: '#' }}" class="card-category shop-now-link">
+        <a href="{{ collection.url | default: '#' }}" class="card-category shop-now-link subtitle">
           {{ collection.title | escape }}
         </a>        
       {% endfor %}

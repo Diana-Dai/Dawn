@@ -1,19 +1,11 @@
 .video-section.page-width {
-  margin-top: 5rem;
   margin-bottom: 5rem;
 }
-
-@media screen and (min-width: 750px) {
-  .video-section.page-width {
-    margin-top: calc(5rem + var(--page-width-margin));
-    margin-bottom: calc(5rem + var(--page-width-margin));
-  }
-}
-
 .video-section__media {
   position: relative;
-  padding-bottom: 56.25%;
+  height: 600px;
 }
+
 
 .video-section__media.deferred-media {
   overflow: visible;
@@ -33,4 +25,95 @@
   position: absolute;
   width: 100%;
   height: 100%;
+}
+
+.video-overlay{
+  position: absolute;
+  top: 8rem;
+  bottom: 8rem;
+  left: 3rem;
+  right: 3rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-overlay-content{
+  background-color: rgba(255, 255, 255, 0.603);
+  width: 100%;
+  height: 100%;
+}
+.video-overlay-flex{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+.video-overlay-flex .s-btn{
+  margin-top: 4rem;
+  animation: blink 1.5s ease-in-out forwards infinite;
+}
+.video-overlay-flex .s-btn:hover{
+  animation: none;
+  box-shadow: 0px 0px 0px 10px #ffffff93;
+}
+@keyframes blink{
+  0%{
+    box-shadow: 0px 0px 0px 0px #ffffffbe;
+  }
+  60%{
+    box-shadow: 0px 0px 0px 25px rgba(255, 255, 255, 0);
+  }
+  100%{
+    box-shadow: 0px 0px 0px 0px rgba(255, 255, 255, 0);
+
+  }
+}
+.video-overlay-flex svg{
+  width: 1.4rem;
+  margin-left: 0.3rem;
+}
+@media screen and (min-width: 750px) {
+  .video-section.page-width {
+    margin-top: calc(5rem + var(--page-width-margin));
+    margin-bottom: calc(5rem + var(--page-width-margin));
+  }
+  .video-overlay-flex{
+    width: 600px;
+  }
+}
+.video-play{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.925);
+  z-index: 9999;
+}
+.video-play .video-iframe{
+  height: 80%;
+  margin: 8rem 12rem;
+}
+.video-play iframe{
+  position: relative;
+}
+.video-play:not(.loaded){
+  display: none;
+}
+.video-play.loaded{
+  display: block;
+}
+.video-play .s-btn{
+  position: absolute;
+  right: 4rem;
+  top: 4rem;
+}
+.video-play .s-btn .icon{
+  width: 1.3rem;
 }

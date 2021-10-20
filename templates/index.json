@@ -210,6 +210,17 @@
       ],
       "settings": {
       }
+    },
+    "16347107470be92046": {
+      "type": "video",
+      "settings": {
+        "heading": "Browse our showcase and see for photography & art designs",
+        "text": "Start this journey with the efficient weather is amazing, walk and there's sweet carajillo, flavour seasonal aroma single.",
+        "cover_image": "shopify:\/\/shop_images\/st_demo5_008-min.jpg",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "full_width": true
+      }
     }
   },
   "order": [
@@ -218,6 +229,7 @@
     "1634544258ef473cfe",
     "163460351349208fcc",
     "1634624187bf72a001",
-    "163470625972e6e740"
+    "163470625972e6e740",
+    "16347107470be92046"
   ]
 }
