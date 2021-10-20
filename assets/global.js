@@ -493,11 +493,7 @@ class DeferredMedia extends HTMLElement {
     window.pauseAllMedia();
     if (!this.getAttribute('loaded')) {
       const container = this.querySelector('#iframe');
-      container.classList.add('loaded');
-      // const content = document.createElement('div');
-      // content.appendChild(this.querySelector('template').content.firstElementChild.cloneNode(true));
-      // this.setAttribute('loaded', true);
-      // this.appendChild(content.querySelector('video, model-viewer, iframe')).focus();
+      container.classList.add('loaded').focus();
     }
   }
 }

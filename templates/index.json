@@ -221,6 +221,34 @@
         "description": "",
         "full_width": true
       }
+    },
+    "16347224629092c9f2": {
+      "type": "newsletter",
+      "blocks": {
+        "6acd3891-d91a-41fa-b3a5-1fdafd405e65": {
+          "type": "newsletter",
+          "settings": {
+            "heading": "Subscribe",
+            "text": "<p> Sign up to receive updates, promotions, and sneak peaks of upcoming products. <strong>Plus 20% off your next order<\/strong>.<\/p>"
+          }
+        },
+        "2ed7c14f-3629-4c78-b62e-dce137221a86": {
+          "type": "signUp",
+          "settings": {
+            "heading": "Members get more",
+            "text": "<p>Startup ecosystem infrastructure backing seed round bandwidth series. <strong>Join our free loyalty program<\/strong>.<\/p>",
+            "image": "shopify:\/\/shop_images\/st__demo5__020-min.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "6acd3891-d91a-41fa-b3a5-1fdafd405e65",
+        "2ed7c14f-3629-4c78-b62e-dce137221a86"
+      ],
+      "settings": {
+        "color_scheme": "background-1",
+        "full_width": true
+      }
     }
   },
   "order": [
@@ -230,6 +258,7 @@
     "163460351349208fcc",
     "1634624187bf72a001",
     "163470625972e6e740",
-    "16347107470be92046"
+    "16347107470be92046",
+    "16347224629092c9f2"
   ]
 }

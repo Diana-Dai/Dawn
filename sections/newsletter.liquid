@@ -2,16 +2,15 @@
 {{ 'newsletter-section.css' | asset_url | stylesheet_tag }}
 
 <div class="newsletter center{% if section.settings.full_width == false %} newsletter--narrow page-width{% endif%}">
+  </div>
   <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when '@app' -%}
           {% render block %}
-        {%- when 'heading' -%}
+        {%- when 'newsletter' -%}
           <h2 class="h1" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
-        {%- when 'paragraph' -%}
           <div class="newsletter__subheading rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
-        {%- when 'email_form' -%}
           <div {{ block.shopify_attributes }}>
             {% form 'customer', class: 'newsletter-form' %}
               <input type="hidden" name="contact[tags]" value="newsletter">
@@ -105,38 +104,47 @@
   ],
   "blocks": [
     {
-      "type": "heading",
-      "name": "t:sections.newsletter.blocks.heading.name",
+      "type": "newsletter",
+      "name": "Add newsletter",
       "limit": 1,
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "default": "Subscribe to our emails",
+          "default": "Subscribe",
           "label": "t:sections.newsletter.blocks.heading.settings.heading.label"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "name": "t:sections.newsletter.blocks.paragraph.name",
-      "limit": 1,
-      "settings": [
+        },
         {
           "type": "richtext",
           "id": "text",
-          "default": "<p>Be the first to know about new collections and exclusive offers.</p>",
+          "default": "<p> Sign up to receive updates, promotions, and sneak peaks of upcoming products. <strong>Plus 20% off your next order</strong>.</p>",
           "label": "t:sections.newsletter.blocks.paragraph.settings.paragraph.label"
         }
       ]
     },
     {
-      "type": "email_form",
-      "name": "t:sections.newsletter.blocks.email_form.name",
-      "limit": 1
-    },
-    {
-      "type": "@app"
+      "type": "signUp",
+      "name": "Add Signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Members get more",
+          "label": "Members get more"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Startup ecosystem infrastructure backing seed round bandwidth series. <strong>Join our free loyalty program</strong>.</p>",
+          "label": "Description"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
     }
   ],
   "presets": [
@@ -144,13 +152,10 @@
       "name": "t:sections.newsletter.presets.name",
       "blocks": [
         {
-          "type": "heading"
+          "type": "newsletter"
         },
         {
-          "type": "paragraph"
-        },
-        {
-          "type": "email_form"
+          "type": "signUp"
         }
       ]
     }
