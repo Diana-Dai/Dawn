@@ -153,10 +153,62 @@
         "button_text": "See all products",
         "link": "shopify:\/\/collections",
         "show_secondary_image": true,
+        "show_category": true,
         "add_image_padding": false,
         "show_image_outline": true,
         "show_vendor": false,
         "show_rating": false
+      }
+    },
+    "163470625972e6e740": {
+      "type": "main-testimonials",
+      "blocks": {
+        "163470625972e6e740-0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_01-min.png"
+          }
+        },
+        "625e0321-5059-4b6b-9fbf-ed30eb59b84d": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_02-min.png"
+          }
+        },
+        "c552d46f-fc93-41be-a37b-fd687f282c7f": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_03-min.png"
+          }
+        },
+        "9b869d79-8199-46fe-96bb-d3aec982f985": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_04-min.png"
+          }
+        },
+        "198f19d2-4a1e-45c4-b9a6-f043057a38bf": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_06-min.png"
+          }
+        },
+        "55e4f625-72e8-40ec-8222-f7e19c135566": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_11-min.png"
+          }
+        }
+      },
+      "block_order": [
+        "163470625972e6e740-0",
+        "625e0321-5059-4b6b-9fbf-ed30eb59b84d",
+        "c552d46f-fc93-41be-a37b-fd687f282c7f",
+        "9b869d79-8199-46fe-96bb-d3aec982f985",
+        "198f19d2-4a1e-45c4-b9a6-f043057a38bf",
+        "55e4f625-72e8-40ec-8222-f7e19c135566"
+      ],
+      "settings": {
       }
     }
   },
@@ -165,6 +217,7 @@
     "1634543623866ff911",
     "1634544258ef473cfe",
     "163460351349208fcc",
-    "1634624187bf72a001"
+    "1634624187bf72a001",
+    "163470625972e6e740"
   ]
 }

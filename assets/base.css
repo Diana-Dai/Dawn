@@ -2363,7 +2363,7 @@ details-disclosure > details {
   width: 100%;
 }
 .shop-now-link:hover .icon-arrow{
-  animation: animation 0.5s ;
+  animation: animation 0.5s;
 }
 
 @keyframes animation {
