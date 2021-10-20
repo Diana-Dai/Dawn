@@ -1,16 +1,42 @@
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'newsletter-section.css' | asset_url | stylesheet_tag }}
 
-<div class="newsletter center{% if section.settings.full_width == false %} newsletter--narrow page-width{% endif%}">
+<div class="newsletter page-width" >
+  <div class="signUp__wrapper">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'signUp' -%}
+        <div class="signUp__titles">
+          <h3 {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h3>
+          <div class="subtitle rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          <a role="button" href="/account/login" class="btn-primary shop-now-link">
+            <span>Sign Up</span>
+            <i class="shop-now-icon"> {% render 'icon-arrow-3' %}</i>
+          </a>
+        </div>
+        <div class="signUp__image">
+            <img
+            srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+              {{ block.settings.image | img_url: 'master' }} {{ block.settings.image.width }}w"
+            src="{{ block.settings.image | img_url: '300x' }}"
+            loading="lazy"
+            alt="{{ block.settings.image.alt | escape }}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"
+          >
+        </div>
+        {%- endcase -%}
+    {%- endfor -%}
   </div>
-  <div class="newsletter__wrapper color-{{ section.settings.color_scheme }} gradient">
+  <div class="newsletter__wrapper ">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when '@app' -%}
           {% render block %}
         {%- when 'newsletter' -%}
-          <h2 class="h1" {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h2>
-          <div class="newsletter__subheading rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          <h3 {{ block.shopify_attributes }}>{{ block.settings.heading | escape }}</h3>
+          <div class="subtitle rte" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
           <div {{ block.shopify_attributes }}>
             {% form 'customer', class: 'newsletter-form' %}
               <input type="hidden" name="contact[tags]" value="newsletter">
@@ -39,8 +65,10 @@
                   <label class="field__label" for="NewsletterForm--{{ section.id }}">
                     {{ 'newsletter.label' | t }}
                   </label>
-                  <button type="submit" class="newsletter-form__button field__button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
-                    {% render 'icon-arrow' %}
+                  <button type="submit" class="btn-primary shop-now-link" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button_label' | t }}">
+                    <span>
+                      {{ 'newsletter.button_label' | t }}
+                    </span>
                   </button>
                 </div>
                 {%- if form.errors -%}
@@ -52,6 +80,7 @@
               {%- endif -%}
             {% endform %}
           </div>
+          <small>{{ block.settings.info }}</small>
       {%- endcase -%}
     {%- endfor -%}
   </div>
@@ -119,6 +148,12 @@
           "id": "text",
           "default": "<p> Sign up to receive updates, promotions, and sneak peaks of upcoming products. <strong>Plus 20% off your next order</strong>.</p>",
           "label": "t:sections.newsletter.blocks.paragraph.settings.paragraph.label"
+        },
+        {
+          "type": "richtext",
+          "id": "info",
+          "default": "<p>Your personal details are strictly for our use, and you can unsubscribe at any time.</p>",
+          "label": "Info about unsubscribe"
         }
       ]
     },
