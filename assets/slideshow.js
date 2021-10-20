@@ -6,7 +6,7 @@ const autoSlide = function () {
 
 const utils ={
   next(){
-    var slides = document.querySelectorAll('.carousel-wrapper .slide');
+    var slides = document.querySelectorAll('.slideshow .slide');
     slides.forEach(function (item) {
       if(item.classList.contains('active')){
         item.classList.remove('active');
@@ -18,7 +18,7 @@ const utils ={
 };
 
 const clickBtn = function(){
-    var btn = document.querySelectorAll('.control-btn');
+    var btn = document.querySelectorAll('.slideshow .control-btn');
     btn.forEach(function (item) {
       item.addEventListener('click',function () {
           utils.next();

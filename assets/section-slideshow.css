@@ -28,45 +28,6 @@
     object-fit: cover;
     object-position: 60% 50%;
 }
-
-.carousel-container .control-btn {
-    position: absolute;
-    top: 50%;
-    display: inline-block;
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    cursor: pointer;
-    border-color: transparent;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-
-}
-.carousel-container .control-btn .icon{
-    width: 2rem;
-    height: 2rem;
-}
-.carousel-container .control-btn:hover {
-    background-color: rgba(0, 0, 0, 0.774);
-}
-.carousel-container .control-btn-prev {
-    transform: rotate(90deg);
-    left: 3rem;
-}
-.carousel-container .control-btn-prev .icon{
-    margin-bottom: -0.8rem;
-}
-.carousel-container .control-btn-next {
-    transform: rotate(-90deg);
-    right: 3rem;
-}
-
-.carousel-container .control-btn-next .icon{
-    margin-bottom: -0.4rem;
-}
-
 .banner__content{
     position: absolute;
     top: 25vh;

@@ -1086,7 +1086,7 @@ summary::-webkit-details-marker {
 /* component-media */
 .media {
   display: block;
-  background-color: rgba(var(--color-foreground), 0.1);
+  background-color:#fff;
   position: relative;
   overflow: hidden;
 }
@@ -2398,12 +2398,12 @@ details-disclosure > details {
 #MainContent{
   background-color: #F8F8F8;
 }
-#MainContent section:not(.spaced-section--full-width){
+#MainContent section:not(.slideshow){
   padding-bottom: 5rem;
 }
 
 @media screen and (max-width: 750px) {
-  #MainContent section{
+  #MainContent section:not(.slideshow){
     padding-bottom: 3rem;
   }
 }
@@ -2439,4 +2439,71 @@ details-disclosure > details {
 .price-item{
   font-size: 1.56rem;
   font-weight: 500;
+}
+
+/* Control button */
+.s-control-btn,
+.control-btn {
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  cursor: pointer;
+  border-color: transparent;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+.s-control-btn{
+  top: 30%;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+  transition: 0.1s linear;
+  color: #000;
+}
+.s-control-btn .icon,
+.control-btn .icon{
+  width: 2rem;
+  height: 2rem;
+}
+
+.s-control-btn:hover{
+  color: rgb(var(--color-base-accent-2));
+  box-shadow: 0px 0px 0px 10px #d1d1d148;
+}
+
+.control-btn:hover {
+  background-color: rgba(0, 0, 0, 0.774);
+}
+
+.control-btn-prev {
+  transform: rotate(90deg);
+  left: -1rem;
+}
+.control-btn-prev .icon{
+  margin-bottom: -0.8rem;
+}
+.control-btn-next {
+  transform: rotate(-90deg);
+  right: -1rem;
+}
+.control-btn.control-btn-prev{
+  left: 3rem;
+}
+.control-btn.control-btn-next{
+  right: 3rem;
+}
+@media screen and (max-width: 750px) {
+  .control-btn.control-btn-prev{
+    left: 1.5rem;
+  }
+  .control-btn.control-btn-next{
+    right: 1.5rem;
+  }
+}
+.control-btn-next .icon{
+  margin-bottom: -0.4rem;
 }
