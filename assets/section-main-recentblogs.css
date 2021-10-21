@@ -1,1 +1,27 @@
 
+.main-recentblogs .banner-title{
+    padding: 2rem 0;
+}
+
+.main-recentblogs .blog-articles{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -1.5rem;
+}
+
+.main-recentblogs .blog-articles .blog-articles__article{
+    padding: 1.5rem;
+    width: 25%;
+}
+
+@media screen and (max-width: 1024px) {
+    .main-recentblogs .blog-articles .blog-articles__article{
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .main-recentblogs .blog-articles .blog-articles__article{
+        width: 100%;
+    }
+}

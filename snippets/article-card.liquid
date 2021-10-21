@@ -14,7 +14,7 @@
 {% endcomment %}
 
 <article class="article-card{% if article.image == blank or show_image == false %} article-card--no-image{% endif %}" aria-labelledby="Article-{{ article.id }}">
-  <a href="{{ article.url }}" class="article-content motion-reduce">
+  <div class="article-content motion-reduce">
     {%- if show_image == true and article.image -%}
       <div class="article-card__image-wrapper">
         <div class="article-card__image media {% if image_height %}article-card__image--{{ image_height }}{% else %}media--landscape{% endif %}" {% if section.settings.image_height == 'adapt' %} style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"{% endif %}>
@@ -40,32 +40,36 @@
 
     <div class="article-card__info">
       <header class="article-card__header">
-        <h2 class="article-card__title" id="Article-{{ article.id }}">
-          {{ article.title | escape }}
-        </h2>
-        {%- if show_date -%}
-          <span class="circle-divider caption-with-letter-spacing">
-            {{- article.published_at | time_tag: format: 'date' -}}
-          </span>
-        {%- endif -%}
+          <div class="badge-wrapper">
+            <span class="badge badge--bottom-left color-accent-2">{{ article.tags[0] -}}</span>
+          </div>
         {%- if show_author -%}
-          <span class="caption-with-letter-spacing">{{ article.author -}}</span>
+          <span class="caption-with-letter-spacing circle-divider">{{ article.author -}}</span> 
         {%- endif -%}
+        {%- if show_date -%}
+        <span class="caption-with-letter-spacing">
+          {{- article.published_at | time_tag: format: 'date' -}}
+        </span>
+       {%- endif -%}
+        <h3 class="article-card__title shop-now-link" id="Article-{{ article.id }}">
+          {{ article.title | escape }}
+        </h3>
       </header>
       {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
         <p class="article-card__excerpt rte-width">
           {%- if article.excerpt.size > 0 -%}
-            {{ article.excerpt | strip_html | truncatewords: 30 }}
+            {{ article.excerpt | strip_html | truncatewords: 20 }}
           {%- else -%}
-            {{ article.content | strip_html | truncatewords: 30 }}
+            {{ article.content | strip_html | truncatewords: 20 }}
           {%- endif -%}
         </p>
       {%- endif -%}
-      <div class="article-card__footer">
-        {%- if article.comments_count > 0 and blog.comments_enabled? -%}
-          <span>{{ 'blogs.article.comments' | t: count: article.comments_count }}</span>
-        {%- endif -%}
+      <div>
+        <a class="shop-now-link link link--text focus-inset" href="{{ article.url }}">Read More
+          <i class="shop-now-icon">
+            {% render 'icon-arrow-3' %}
+          </i>
+        </a>
       </div>
     </div>
-  </a>
 </article>

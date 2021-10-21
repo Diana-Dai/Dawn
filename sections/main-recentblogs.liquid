@@ -1,11 +1,6 @@
 {{ 'component-article-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-recentblogs.css' | asset_url | stylesheet_tag }}
 
-{% for tag in blog.all_tags %}
-  {{ tag }}
-{% endfor %}
-
-
   <div class="main-recentblogs page-width">
     <div class="banner-title">
         <h3>{{ section.settings.title }}</h3>
@@ -16,9 +11,8 @@
         </div>
       </div>
     <div class="blog-articles">
-      <!-- {% assign newestArticles = blog.articles | sort: 'published_at' | reverse %} -->
-      {%- for article in blog.articles -%}
-      {{ article.title }}
+      {% assign newestArticles = blogs.news.articles | sort: 'published_at' | reverse %}
+      {%- for article in newestArticles -%}
         <div class="blog-articles__article article">
           {%- render 'article-card', article: article, image_height: section.settings.image_height, show_image: section.settings.show_image, show_date: section.settings.show_date, show_author: section.settings.show_author -%}
         </div>
