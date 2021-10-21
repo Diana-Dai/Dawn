@@ -2537,3 +2537,7 @@ details-disclosure > details {
   background-color: rgb(var(--color-base-accent-2));
   color: #fff;
 }
+.bg-white{
+  background: #fff;
+
+}

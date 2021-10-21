@@ -9,7 +9,7 @@
             "image": "shopify:\/\/shop_images\/empty-living-room-with-blue-sofa-plants-table-empty-white-wall-background-3d-rendering_1_1d981b84-df98-4108-82d1-04c445ce9cc3.jpg",
             "subtitle": "#stockieinterior",
             "title": "02. Gesten design studio",
-            "description": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture<strong> market business-to-business<\/strong>.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture <strong>market business-to-business<\/strong>.",
+            "description": "<p>Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture<strong> market business-to-business<\/strong>.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture <strong>market business-to-business<\/strong>.<\/p>",
             "button_text": "Shop Now",
             "button_link": "shopify:\/\/collections\/all"
           }
@@ -20,7 +20,7 @@
             "image": "shopify:\/\/shop_images\/living-room-interior-loft-apartment-with-armchair-concrete-wall-3d-rendering_1.jpg",
             "subtitle": "#stockieinterior",
             "title": "02. Gesten design studio",
-            "description": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture<strong> market business-to-business<\/strong>.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture <strong>market business-to-business<\/strong>.",
+            "description": "<p>Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture<strong> market business-to-business<\/strong>.Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture <strong>market business-to-business<\/strong>.<\/p>",
             "button_text": "Shop Now",
             "button_link": "shopify:\/\/collections\/all"
           }
@@ -75,7 +75,7 @@
             "discount": "Earn 10% Back in Rewards",
             "join_us": "Join our free loyalty program",
             "title": "Curious about the future of design at Stockie?",
-            "body": "Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture",
+            "body": "<p>Startup ecosystem infrastructure seeds round bandwidth series A financing scrum project venture<\/p>",
             "link": "shopify:\/\/pages\/about-us",
             "text": "Learn More"
           }
@@ -215,7 +215,7 @@
       "type": "video",
       "settings": {
         "heading": "Browse our showcase and see for photography & art designs",
-        "text": "Start this journey with the efficient weather is amazing, walk and there's sweet carajillo, flavour seasonal aroma single.",
+        "text": "<p>Start this journey with the efficient weather is amazing, walk and there's sweet carajillo, flavour seasonal aroma single.<\/p>",
         "cover_image": "shopify:\/\/shop_images\/st_demo5_008-min.jpg",
         "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
         "description": "",
@@ -229,7 +229,8 @@
           "type": "newsletter",
           "settings": {
             "heading": "Subscribe",
-            "text": "<p> Sign up to receive updates, promotions, and sneak peaks of upcoming products. <strong>Plus 20% off your next order<\/strong>.<\/p>"
+            "text": "<p> Sign up to receive updates, promotions, and sneak peaks of upcoming products. <strong>Plus 20% off your next order<\/strong>.<\/p>",
+            "info": "<p>Your personal details are strictly for our use, and you can unsubscribe at any time.<\/p>"
           }
         },
         "2ed7c14f-3629-4c78-b62e-dce137221a86": {
@@ -249,6 +250,19 @@
         "color_scheme": "background-1",
         "full_width": true
       }
+    },
+    "163477358521c3e9b0": {
+      "type": "main-recentblogs",
+      "settings": {
+        "title": "Most recent news",
+        "button_text": "See all news",
+        "link": "shopify:\/\/blogs\/news",
+        "layout": "collage",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": true
+      }
     }
   },
   "order": [
@@ -259,6 +273,7 @@
     "1634624187bf72a001",
     "163470625972e6e740",
     "16347107470be92046",
-    "16347224629092c9f2"
+    "16347224629092c9f2",
+    "163477358521c3e9b0"
   ]
 }
