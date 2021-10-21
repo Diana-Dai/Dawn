@@ -79,6 +79,22 @@
         "enable_video_looping": false
       }
     },
+    "1634795117cb8c89ae": {
+      "type": "apps",
+      "blocks": {
+        "d4d1272b-d886-4665-b288-ad0ec4cb551e": {
+          "type": "shopify:\/\/apps\/product-reviews\/blocks\/reviews\/bae150af-8da8-48b2-9867-398188115e5f",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "d4d1272b-d886-4665-b288-ad0ec4cb551e"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -94,6 +110,7 @@
   },
   "order": [
     "main",
+    "1634795117cb8c89ae",
     "product-recommendations"
   ]
 }

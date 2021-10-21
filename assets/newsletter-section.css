@@ -28,12 +28,11 @@
 
 .newsletter__wrapper > * {
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 1.8rem;
 }
 
-
-.newsletter__wrapper > * + .newsletter-form {
-  margin-top: 3rem;
+.newsletter__wrapper .newsletter-form {
+  margin-bottom: 3rem;
 }
 
 .newsletter__subheading {
