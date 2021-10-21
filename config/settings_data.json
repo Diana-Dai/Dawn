@@ -43,6 +43,13 @@
       "footer": {
         "type": "footer",
         "blocks": {
+          "5d205d21-71d0-41e0-a589-482dc6356605": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Get Help",
+              "menu": "get-help"
+            }
+          },
           "footer-0": {
             "type": "link_list",
             "settings": {
@@ -52,12 +59,12 @@
           }
         },
         "block_order": [
+          "5d205d21-71d0-41e0-a589-482dc6356605",
           "footer-0"
         ],
         "settings": {
           "newsletter_enable": true,
           "newsletter_heading": "Subscribe",
-          "enable_country_selector": true,
           "enable_language_selector": true,
           "payment_enable": true
         }
@@ -127,7 +134,6 @@
             "text"
           ],
           "settings": {
-            "color_scheme": "accent-1"
           }
         }
       }

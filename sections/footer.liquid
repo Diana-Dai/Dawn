@@ -33,12 +33,12 @@
               <ul class="footer-block__details-content list-unstyled">
                 <li>
                   <a href="tel:+4 (509) 120 6705" class="link link--text list-menu__item list-menu__item--link">
-                   Phone: +4 (509) 120 6705
+                   <strong>Phone:</strong> +4 (509) 120 6705
                   </a>
                 </li>
                 <li>
                   <address class="">
-                    Address: 1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96052, United State 
+                    <strong>Address:</strong> 1418 Riverwood Drive, Suite 3245 Cottonwood, CA 96052, United State 
                   </address>
                 </li>
               </ul>
@@ -119,6 +119,9 @@
                         </span>
                       </button>
                     </div>
+                    <small class="newsletter-form__info"><p>	
+                      Keep up to date with our latest news and special offers.
+                      </p></small>
                     {%- if form.errors -%}
                       <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
                     {%- endif -%}
