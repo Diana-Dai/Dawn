@@ -1,16 +1,3 @@
-.collection-page {
-    display: flex;
-}
-  
-.collection-sidebar{
-  flex-basis: 200px;
-  margin: 0 2rem;
-}
-
-.collection-content{
-  flex: 1 1 0;
-
-}
 
 .collection-sidebar .shop-now-link{
   font-weight: normal ;
@@ -22,4 +9,18 @@
 }
 .collection-sidebar li{
   margin: 0.8rem 0;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.collection-sidebar{
+  flex-basis: 200px;
+  margin-right: 2rem;
+}
+
+.collection-content{
+flex: 1 1 0;
+
 }

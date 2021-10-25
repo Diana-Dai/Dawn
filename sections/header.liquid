@@ -413,7 +413,7 @@
           </summary>
           <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
             <div class="modal-overlay"></div>
-            <div class="search-modal__content" tabindex="-1">
+            <div class="search-modal__content">
               {%- if settings.predictive_search_enabled -%}
                 <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
               {%- endif -%} 
@@ -438,7 +438,6 @@
                         spellcheck="false" 
                       {%- endif -%}
                     >
-                    <label class="field__label" for="Search-In-Modal">{{ 'general.search.search' | t }}</label>
                     <input type="hidden" name="options[prefix]" value="last">
                     <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
                       <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
@@ -455,17 +454,14 @@
                         </svg>
                       </div>
                     </div>
-
                     <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
                   {%- endif -%}
                 </form>
               {%- if settings.predictive_search_enabled -%}
                 </predictive-search>
               {%- endif -%}
-              <button type="button" class="search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
-                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
-                  <use href="#icon-close">
-                </svg>
+              <button type="button" class="s-btn search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
+                {% render 'icon-close' %}
               </button>
             </div>
           </div>

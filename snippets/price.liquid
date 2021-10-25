@@ -69,7 +69,7 @@
         <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
       </dt>
       <dd {% if show_badges == false %}class="price__last"{% endif %}>
-        <span class="price-item price-item--sale">
+        <span class="price-item price-item--sale title">
           {{ money_price }}
         </span>
       </dd>
@@ -91,6 +91,7 @@
   </dl>
   {%- if show_badges -%}
     <span class="badge price__badge-sale color-{{ settings.sale_badge_color_scheme }}" aria-hidden="true">
+      {{ product.price | minus: product.compare_at_price_max | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}%
       {{ 'products.product.on_sale' | t }}
     </span>
 

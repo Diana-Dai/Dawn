@@ -9,6 +9,18 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "blocks": {
+        "b28fcd71-eb58-499c-93e5-05448ef79a48": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Product categories",
+            "menu": "categories"
+          }
+        }
+      },
+      "block_order": [
+        "b28fcd71-eb58-499c-93e5-05448ef79a48"
+      ],
       "settings": {
         "products_per_page": 16,
         "image_ratio": "adapt",

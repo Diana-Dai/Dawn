@@ -153,7 +153,6 @@
         "button_text": "See all products",
         "link": "shopify:\/\/collections",
         "show_secondary_image": true,
-        "show_category": true,
         "add_image_padding": false,
         "show_image_outline": true,
         "show_vendor": false,

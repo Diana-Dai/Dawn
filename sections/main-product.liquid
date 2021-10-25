@@ -71,8 +71,16 @@
       <div id="ProductInfo-{{ section.id }}" class="product__info-container{% if section.settings.enable_sticky_info %} product__info-container--sticky{% endif %}">
         {%- assign product_form_id = 'product-form-' | append: section.id -%}
 
+        <div class="card__badge">
+          {%- if product.available == false -%}
+            <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">{{ 'products.product.sold_out' | t }}</span>
+          {%- else -%}
+            <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">In stock</span>
+          {%- endif -%}
+        </div>
         {%- for block in section.blocks -%}
           {%- case block.type -%}
+
           {%- when '@app' -%}
             {% render block %}
           {%- when 'text' -%}
@@ -83,6 +91,7 @@
             <h1 class="product__title" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
             </h1>
+
           {%- when 'price' -%}
             <div class="no-js-hidden" id="price-{{ section.id }}" {{ block.shopify_attributes }}>
               {%- render 'price', product: product, use_variant: true, show_badges: true, price_class: 'price--large' -%}
@@ -97,18 +106,19 @@
                 {%- endif -%}
               </div>
             {%- endif -%}
+            {%- when 'description' -%}
+              {%- if product.description != blank -%}
+                <div class="product__description rte">
+                  {{ product.description }}
+                </div>
+              {%- endif -%}
             <div {{ block.shopify_attributes }}>
               {%- form 'product', product, id: 'product-form-installment', class: 'installment caption-large' -%}
                 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-          {%- when 'description' -%}
-            {%- if product.description != blank -%}
-              <div class="product__description rte">
-                {{ product.description }}
-              </div>
-            {%- endif -%}
+
           {%- when 'additional_description' -%}
               <div class="product__additional_description rte">
                 <p> Description </p>
