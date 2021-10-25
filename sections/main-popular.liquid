@@ -24,7 +24,6 @@
                   {% render 'product-card',
                   product_card_product: product,
                   media_size: 'adapt',
-                  show_category: section.settings.show_category,
                   show_secondary_image: section.settings.show_secondary_image,
                   add_image_padding: section.settings.add_image_padding,
                   show_vendor: section.settings.show_vendor,
@@ -85,12 +84,6 @@
           "id": "show_secondary_image",
           "default": false,
           "label": "Show secondary image"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_category",
-          "default": true,
-          "label": "Show category"
         },
         {
           "type": "checkbox",

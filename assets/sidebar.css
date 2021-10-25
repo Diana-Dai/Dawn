@@ -1,0 +1,25 @@
+.collection-page {
+    display: flex;
+}
+  
+.collection-sidebar{
+  flex-basis: 200px;
+  margin: 0 2rem;
+}
+
+.collection-content{
+  flex: 1 1 0;
+
+}
+
+.collection-sidebar .shop-now-link{
+  font-weight: normal ;
+  display: inline !important;
+  font-size: 1.5rem;
+}
+.collection-sidebar ul{
+  margin: 3rem 0;
+}
+.collection-sidebar li{
+  margin: 0.8rem 0;
+}

@@ -383,7 +383,8 @@ h1,
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: 4rem;
+    font-size: 5rem;
+    font-weight: bold;
   }
 }
 
@@ -2402,6 +2403,7 @@ details-disclosure > details {
 
 
 #MainContent{
+  margin-top: -110px;
   background-color: #F8F8F8;
 }
 #MainContent section:not(.slideshow){

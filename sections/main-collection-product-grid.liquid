@@ -3,12 +3,38 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-product-grid.css' | asset_url | stylesheet_tag }}
+<link rel="stylesheet" href="{{ 'sidebar.css' | asset_url }}" media="print" onload="this.media='all'">
 
 <link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
 
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 
-{%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+    {%- when 'link_list' -%}
+      <div class="collection-sidebar">
+        <div class="collection-block__details-content rte">
+          <h3>{{ block.settings.heading }}</h3>
+        </div>
+        {%- if block.settings.menu != blank and block.settings.heading != blank -%}
+          <ul class="collection-block__details-content list-unstyled">
+            {%- for link in block.settings.menu.links -%}
+              <li>
+                <a href="{{ link.url }}" class="shop-now-link link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}">
+                  {{ link.title }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+      </div>
+     {%- endif -%}
+   {% endcase %}
+{% endfor %}
+
+
+<div class="collection-content">
+  {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
   {{ 'component-facets.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
 
@@ -60,11 +86,12 @@
     {%- endif -%}
   {%- endpaginate -%}
 </div>
+</div>
 
 {% schema %}
 {
   "name": "t:sections.main-collection-product-grid.name",
-  "class": "spaced-section collection-grid-section",
+  "class": "spaced-section collection-grid-section collection-page",
   "settings": [
     {
       "type": "range",
@@ -153,6 +180,28 @@
       "default": false,
       "label": "t:sections.main-collection-product-grid.settings.collapse_on_larger_devices.label"
     }
+  ],
+  "blocks":[
+  {
+    "type": "link_list",
+    "name": "Sidebar",
+    "limit":1,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "default": "Product categories",
+        "label": "Product categories",
+        "info": "Product categories"
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "info": "Menu"
+      }
+    ]
+  }
   ]
 }
 {% endschema %}

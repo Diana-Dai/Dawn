@@ -333,3 +333,7 @@
 .card-category{
 font-size: 1.4rem;
 }
+
+.card-information__wrapper .shop-now-link{
+  margin-top: 0 !important;
+}

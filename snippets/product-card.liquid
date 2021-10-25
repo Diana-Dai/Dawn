@@ -23,13 +23,11 @@
         <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
         <div class="caption-with-letter-spacing light">{{ product_card_product.vendor }}</div>
       {%- endif -%}
-      {%- if show_category -%}
       {% for collection in product_card_product.collections %}
         <a href="{{ collection.url | default: '#' }}" class="card-category shop-now-link subtitle">
           {{ collection.title | escape }}
         </a>        
       {% endfor %}
-      {%- endif -%}
       {%- if product_card_product.featured_media -%}
         <h3 class="card-information__text h5">
           <a href="{{ product_card_product.url | default: '#' }}" class="shop-now-link">
