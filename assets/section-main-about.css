@@ -1,0 +1,25 @@
+
+.content h2{
+  font-size: 30px;
+}
+.content h2 span{
+  color: var(--gradient-base-accent-2);
+}
+@media screen and (min-width: 750px) {
+  .content{
+    display: grid; 
+    grid-auto-columns: 3fr 1.8fr; 
+    grid-template-rows: 1fr; 
+    gap: 4rem; 
+    grid-template-areas: 
+      ". ."; 
+    justify-items: stretch; 
+  }
+
+  .content h2{
+    font-size: 38px;
+  }
+  .content .title{
+    width: 60%;
+  }
+}

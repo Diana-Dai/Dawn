@@ -1,14 +1,23 @@
 {{ 'component-article-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+{{ 'component-section-hero.css' | asset_url | stylesheet_tag }}
 
 
 {%- paginate blog.articles by 6 -%}
 
-  <div class="main-blog page-width">
-    <h1 class="title--primary">{{ blog.title | escape }}</h1>
+  <div class="main-blog">
+    <div class="section-hero">
+      <div class="bg-banner"> </div>
+      <div class="section-hero__inner page-width">
+        <div class="section-hero__text-wrapper">
+          <h1 class="section-hero__title">
+            <span class="visually-hidden">{{ blog.title | escape }}</span>
+            {{ blog.title | escape }}</h1>
+            <div class="section-hero__description rte"></div></div></div>
+    </div>
 
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+    <div class="blog-articles page-width {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
       {% assign newestArticles = blog.articles | sort:'published_at' | reverse %}
       {%- for article in newestArticles -%}
         <div class="blog-articles__article article">
@@ -27,7 +36,7 @@
 {
   "name": "t:sections.main-blog.name",
   "tag": "section",
-  "class": "spaced-section",
+  "class": "spaced-section mt-11",
   "settings": [
     {
       "type": "header",

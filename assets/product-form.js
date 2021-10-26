@@ -2,7 +2,7 @@ if (!customElements.get('product-form')) {
   customElements.define('product-form', class ProductForm extends HTMLElement {
     constructor() {
       super();
-
+      
       this.form = this.querySelector('form');
       this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
       this.cartNotification = document.querySelector('cart-notification');
@@ -19,7 +19,6 @@ if (!customElements.get('product-form')) {
       submitButton.setAttribute('aria-disabled', true);
       submitButton.classList.add('loading');
       this.querySelector('.loading-overlay__spinner').classList.remove('hidden');
-
       const config = fetchConfig('javascript');
       config.headers['X-Requested-With'] = 'XMLHttpRequest';
       config.body = JSON.stringify({

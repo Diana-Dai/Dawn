@@ -2,11 +2,19 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
+      }
+    },
+    "16352366544cf55afb": {
+      "type": "main-about",
+      "settings": {
+        "image": "shopify:\/\/shop_images\/st__blog_02-min-768x513.jpg"
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "16352366544cf55afb"
   ]
 }

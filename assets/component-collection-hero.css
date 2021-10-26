@@ -1,28 +1,5 @@
-.collection-hero{
-  position: relative;
-  padding-top: 155px;
-  padding-bottom: 50px;
-}
-.bg-banner{
-  background-image: url('https://colabrio.ams3.cdn.digitaloceanspaces.com/stockie_landing/main_demo/assets/2019/03/HeaderTitleImage-min.jpg');
-  background-position: left;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
 .collection-hero--with-image {
   background-color: rgba(var(--color-foreground), 0.04);
-}
-
-.collection-hero__inner {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 2rem;
-  z-index: 1;
 }
 
 .collection-hero--with-image .collection-hero__inner {
@@ -41,9 +18,6 @@
   }
 }
 
-.collection-hero__text-wrapper {
-  flex-basis: 100%;
-}
 
 @media screen and (min-width: 750px) {
   .collection-hero {
@@ -57,39 +31,6 @@
   }
 }
 
-.collection-hero__title {
-  margin: 5rem 0 0;
-}
-
-.collection-hero__title + .collection-hero__description {
-  margin-top: 1.5rem;
-  font-size: 1.6rem;
-  line-height: 1.5;
-}
-
-@media screen and (min-width: 750px) {
-  .collection-hero__title + .collection-hero__description {
-    font-size: 1.8rem;
-    margin-top: 2rem;
-  }
-
-  .collection-hero__description {
-    max-width: 66.67%;
-  }
-
-  .collection-hero--with-image .collection-hero__description {
-    max-width: 100%;
-  }
-}
-
-.collection-hero--with-image .collection-hero__title {
-  margin: 0;
-}
-
-.collection-hero--with-image .collection-hero__text-wrapper {
-  padding: 5rem 0 4rem;
-}
-
 @media screen and (max-width: 749px) {
   .collection-hero__image-container {
     height: 20rem;
@@ -97,7 +38,7 @@
 }
 
 @media screen and (min-width: 750px) {
-  .collection-hero--with-image .collection-hero__text-wrapper {
+  .collection-hero__text-wrapper {
     padding: 4rem 2rem 4rem 0;
     flex-basis: 50%;
   }
