@@ -828,3 +828,15 @@ a.product__text {
 .variant-sku{
   white-space: nowrap;
 }
+
+.badge-stock{
+  font-weight: 500;
+  background-color: rgba(var(--color-foreground), 0.2);
+  border: none !important;
+  padding: 0.8rem 1.3rem !important;
+  transition: var(--duration-short) ease;
+}
+.badge-stock:hover{
+  background-color: var(--gradient-base-accent-2) !important;
+  color: rgb(var(--color-background));
+}

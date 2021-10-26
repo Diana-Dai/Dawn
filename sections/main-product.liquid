@@ -74,9 +74,9 @@
 
         <div class="card__badge">
           {%- if product.available == false -%}
-            <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">{{ 'products.product.sold_out' | t }}</span>
+            <span class="badge badge--bottom-left badge-stock">{{ 'products.product.sold_out' | t }}</span>
           {%- else -%}
-            <span class="badge badge--bottom-left color-{{ settings.sold_out_badge_color_scheme }}">In stock</span>
+            <span class="badge badge--bottom-left badge-stock">In stock</span>
           {%- endif -%}
         </div>
         {%- for block in section.blocks -%}
