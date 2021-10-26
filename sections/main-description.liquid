@@ -1,7 +1,6 @@
 <style>
 
     .nav{
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: flex-start;
@@ -37,9 +36,6 @@
       transition: height 0.3s cubic-bezier(0.2, 0.35, 0.25, 1);
     }
     .tabNav_line{
-      position: absolute;
-      bottom: 0;
-      left: 0;
       width: 90px;
       height: 2px;
       background-color: rgb(var(--color-badge-background));
@@ -68,7 +64,7 @@
     </div>
   </div>
 
-<script defer>
+<script>
   document.querySelectorAll('.nav-link').forEach(item=>{
     item.addEventListener('click', e=>{
       var target = e.target.getAttribute('aria-controls');
