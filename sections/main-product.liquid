@@ -18,6 +18,7 @@
   <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+
 <section class="page-width">
   <div class="product grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
@@ -118,12 +119,23 @@
                 {{ form | payment_terms }}
               {%- endform -%}
             </div>
-
-          {%- when 'additional_description' -%}
-              <div class="product__additional_description rte">
-                <p> Description </p>
-               {{ product.metafields.my_fields.additional_description }}
-              </div>
+          <div class="product_meta">
+              {% assign current_variant = product.selected_or_first_available_variant %}
+              <span class="variant-sku circle-divider"><strong>SKU:</strong>{{ current_variant.sku }}</span>
+              {% for collection in product.collections %}
+              <span class="variant-category circle-divider"><strong>Category:</strong>{{ collection.title }}</span>
+              {% endfor %}
+              <span class="variant-tags circle-divider"><strong>Tags:</strong>
+              {% for tag in product.tags %}
+              {% unless forloop.last %}
+                  {{ tag |append:',' }}
+                  {% else %}
+                  {{ tag }}
+              {% endunless %}
+               
+              {% endfor %}
+              </span>
+            </div>
           {%- when 'custom_liquid' -%}
             {{ block.settings.custom_liquid }}
           {%- when 'collapsible_tab' -%}
@@ -211,7 +223,9 @@
               </details>
             </share-button>
             <script src="{{ 'share.js' | asset_url }}" defer="defer"></script>
-          {%- when 'variant_picker' -%}
+        
+
+            {%- when 'variant_picker' -%}
             {%- unless product.has_only_default_variant -%}
               {%- if block.settings.picker_type == 'button' -%}
                 <variant-radios class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" {{ block.shopify_attributes }}>
@@ -378,7 +392,6 @@
       </div>
     </div>
   </div>
-
   <product-modal id="ProductModal-{{ section.id }}" class="product-media-modal media-modal">
     <div class="product-media-modal__dialog" role="dialog" aria-label="{{ 'products.modal.label' | t }}" aria-modal="true" tabindex="-1">
       <button id="ModalClose-{{ section.id }}" type="button" class="product-media-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
@@ -459,7 +472,7 @@
   customElements.define('product-modal', ProductModal);
 {% endjavascript %}
 
-<script>
+<script defer>
   document.addEventListener('DOMContentLoaded', function() {
     function isIE() {
       const ua = window.navigator.userAgent;
@@ -581,11 +594,6 @@
     {
       "type": "quantity_selector",
       "name": "t:sections.main-product.blocks.quantity_selector.name",
-      "limit": 1
-    },
-      {
-      "type": "additional_description",
-      "name": "additional_description",
       "limit": 1
     },
     {

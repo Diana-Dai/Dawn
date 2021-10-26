@@ -261,7 +261,8 @@ fieldset.product-form__input .form__label {
 
 .product__info-container .product-form,
 .product__info-container .product__description {
-  margin: 2.5rem 0;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .product__text {
@@ -813,3 +814,17 @@ a.product__text {
   position: static;
 }
 
+
+.product_meta {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(var(--color-base-text), 0.08);
+}
+.product_meta .shop-now-link{
+  font-size: inherit;
+  font-weight: inherit;
+}
+.variant-tags,
+.variant-category,
+.variant-sku{
+  white-space: nowrap;
+}
