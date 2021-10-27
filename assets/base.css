@@ -992,7 +992,7 @@ summary::-webkit-details-marker {
   }
 
   .grid--4-col-tablet .grid__item {
-    width: calc(25% - 1rem * 3 / 4);
+    width: calc(50% - 1rem * 3 / 4);
   }
 
   .grid--3-col-tablet .grid__item {
@@ -1011,6 +1011,9 @@ summary::-webkit-details-marker {
 
   .grid--3-col-desktop .grid__item {
     width: calc(33.33% - 1rem * 2 / 3);
+  }
+  .grid--4-col-tablet .grid__item {
+    width: calc(25% - 1rem * 3 / 4);
   }
 
   .grid--2-col-desktop .grid__item {
@@ -1489,7 +1492,9 @@ details[open] > .share-button__fallback {
   line-height: 1.5;
   opacity: 0;
 }
-
+.customer.login .field label{
+  opacity: 1;
+}
 .field__input:focus ~ .field__label,
 .field__input:not(:placeholder-shown) ~ .field__label,
 .field__input:-webkit-autofill ~ .field__label,
@@ -2415,7 +2420,7 @@ details-disclosure > details {
   background-color: #F8F8F8;
 }
 
-#MainContent > section:not(.slideshow){
+#MainContent > section:not(:first-child){
   padding-bottom: 5rem;
 }
 

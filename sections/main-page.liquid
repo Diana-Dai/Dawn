@@ -4,10 +4,17 @@
 <noscript>{{ 'section-main-page.css' | asset_url | stylesheet_tag }}</noscript>
 <noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
 
-<div class="page-width page-width--narrow">
-  <h1 class="main-page-title page-title h0">
-    {{ page.title | escape }}
-  </h1>
+<div>
+  <div class="section-hero">
+    <div class="bg-banner"> </div>
+    <div class="section-hero__inner page-width">
+      <div class="section-hero__text-wrapper">
+        <h1 class="section-hero__title">
+          <span class="visually-hidden">{{ page.title | escape }}</span>
+          {{ page.title | escape }}</h1>
+        </div>
+      </div>
+  </div>
   <div class="rte">
     {{ page.content }}
   </div>
@@ -17,6 +24,6 @@
 {
   "name": "t:sections.main-page.name",
   "tag": "section",
-  "class": "spaced-section"
+  "class": "spaced-section mt-11"
 }
 {% endschema %}
