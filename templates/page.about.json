@@ -9,12 +9,114 @@
     "16352366544cf55afb": {
       "type": "main-about",
       "settings": {
-        "image": "shopify:\/\/shop_images\/st__blog_02-min-768x513.jpg"
+        "image": "shopify:\/\/shop_images\/st__image__031-min_ce6bead6-c529-4235-8150-ebf73b4119cc.jpg",
+        "image-2": "shopify:\/\/shop_images\/st__image__032-min-1.jpg"
+      }
+    },
+    "1635292008173b159d": {
+      "type": "main-testimonials",
+      "blocks": {
+        "1635292008173b159d-0": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_08-min.png"
+          }
+        },
+        "49808d62-7f57-49f9-b7e8-350caaf3bfb2": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_06-min.png"
+          }
+        },
+        "7162aaab-bf97-49d2-966a-52c9024a9b55": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_02-min.png"
+          }
+        },
+        "9867e300-3a14-42ab-ba22-7d6971ec8729": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_01-min.png"
+          }
+        },
+        "13da15d0-1efa-49b1-8e39-9a78755c9605": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_04-min.png"
+          }
+        },
+        "3b30ac70-044d-4dfb-afae-78d92750f7c1": {
+          "type": "testimonial",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/st__logo_04-min.png"
+          }
+        }
+      },
+      "block_order": [
+        "1635292008173b159d-0",
+        "49808d62-7f57-49f9-b7e8-350caaf3bfb2",
+        "7162aaab-bf97-49d2-966a-52c9024a9b55",
+        "9867e300-3a14-42ab-ba22-7d6971ec8729",
+        "13da15d0-1efa-49b1-8e39-9a78755c9605",
+        "3b30ac70-044d-4dfb-afae-78d92750f7c1"
+      ],
+      "settings": {
+      }
+    },
+    "1635293226ab21e6ec": {
+      "type": "customer-reviews",
+      "blocks": {
+        "d3391a5d-8d54-4df9-a3fa-42f1088c6477": {
+          "type": "review",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur <br\/>consectetur posuere est, vehicula cursus quam vestibulum non. Sed vel <br\/>dui in diam condimentum ullamcorper ac ut tellus. <\/p>",
+            "name": "John",
+            "position": "Customer"
+          }
+        },
+        "f5662ed8-f662-4b2d-9978-bb4d005d215b": {
+          "type": "review",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur <br\/>consectetur posuere est, vehicula cursus quam vestibulum non. Sed vel <br\/>dui in diam condimentum ullamcorper ac ut tellus. <\/p>",
+            "name": "John",
+            "position": "Customer"
+          }
+        },
+        "e7e8b05f-7854-4266-91ba-e70f237f666e": {
+          "type": "review",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur <br\/>consectetur posuere est, vehicula cursus quam vestibulum non. Sed vel <br\/>dui in diam condimentum ullamcorper ac ut tellus. <\/p>",
+            "name": "John",
+            "position": "Customer"
+          }
+        },
+        "df2dc8f4-776b-49b2-9c38-0622687af3d0": {
+          "type": "review",
+          "settings": {
+            "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur <br\/>consectetur posuere est, vehicula cursus quam vestibulum non. Sed vel <br\/>dui in diam condimentum ullamcorper ac ut tellus. <\/p>",
+            "name": "John",
+            "position": "Customer"
+          }
+        }
+      },
+      "block_order": [
+        "d3391a5d-8d54-4df9-a3fa-42f1088c6477",
+        "f5662ed8-f662-4b2d-9978-bb4d005d215b",
+        "e7e8b05f-7854-4266-91ba-e70f237f666e",
+        "df2dc8f4-776b-49b2-9c38-0622687af3d0"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/st__image__033-min.jpg",
+        "title": "Customer reviews",
+        "subtitle": "Get in touch with us to see how"
       }
     }
   },
   "order": [
     "main",
-    "16352366544cf55afb"
+    "16352366544cf55afb",
+    "1635292008173b159d",
+    "1635293226ab21e6ec"
   ]
 }

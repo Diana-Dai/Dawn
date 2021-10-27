@@ -1,11 +1,12 @@
 {{ 'customer_reveiws.css' | asset_url | stylesheet_tag }}
 {{ 'glide.core.min.css' | asset_url | stylesheet_tag }}
 
-
 <div class="page-width customers-container">
   <div class="customers__reviews">
-    <div class="banner-title">
-      <h3>{{ section.settings.title }}</h3>
+    <div class="banner__title">
+      <div>
+        <h3>{{ section.settings.title }}</h3>
+      </div>
       <p class="subtitle">{{ section.settings.subtitle }}</p>
     </div>
     <div class="glide" id="customer-glide">
@@ -13,15 +14,15 @@
         <ul class="glide__slides">
             {% for block in section.blocks %}
               <li class="glide__slide">
-                  <p>
-                    {{ block.settings.text }}
-                  </p>
                   <div>
+                    {{ block.settings.text }}
+                  </div>
+                  <div class="customers__reviews-name">
                       <span>
-                        {{ block.settings.name }}
+                        <strong>{{ block.settings.name }}</strong>
                       </span>
                   </div>
-                  <div>
+                  <div class="customers__reviews-position">
                       <span>
                         {{ block.settings.position }}
                       </span>
@@ -67,7 +68,7 @@
     type:"carousel",
     perView: 1
   });
-  glide.mount()
+  glide.mount();
 
 </script>
 {% schema %}

@@ -404,14 +404,15 @@ h2,
 
 h3,
 .h3 {
-  font-size: 1.7rem;
+  font-size: 2.5rem;
   font-weight: bold;
+  line-height: 2;
 }
 
 @media only screen and (min-width: 750px) {
   h3,
   .h3 {
-    font-size: 1.9rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -2632,4 +2633,9 @@ details-disclosure > details {
 
 li{
   list-style: none;
+}
+
+img{
+  width: 100%;
+  height: auto;
 }
