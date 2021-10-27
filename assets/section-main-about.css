@@ -2,24 +2,60 @@
 .content h2{
   font-size: 30px;
 }
+.content img{
+  width: 100%;
+  height: auto;
+
+}
 .content h2 span{
   color: var(--gradient-base-accent-2);
+}
+
+.content-title { grid-area: title; }
+.content-body { grid-area: content; }
+.content-title-card { grid-area: image1; }
+.content-body-card { grid-area: image2; }
+
+.content{
+  display: grid; 
+  grid-auto-columns: 4fr 1fr; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: auto auto auto auto; 
+  gap: 3rem; 
+  grid-template-areas: 
+    "title"
+    "content"
+    "image1"
+    "image2"; 
+  justify-items: stretch; 
 }
 @media screen and (min-width: 750px) {
   .content{
     display: grid; 
-    grid-auto-columns: 3fr 1.8fr; 
-    grid-template-rows: 1fr; 
-    gap: 4rem; 
+    grid-auto-columns: 4fr 1fr; 
+    grid-template-columns: 3fr 1.5fr; 
+    grid-template-rows: 0.4fr 1fr; 
+    gap: 8rem; 
     grid-template-areas: 
-      ". ."; 
+      "title content"
+      "image1 image2"; 
     justify-items: stretch; 
   }
-
+  
   .content h2{
-    font-size: 38px;
+    font-size: 38px !important;
+    width: 70%;
+    line-height: 1.5 !important;
   }
-  .content .title{
-    width: 60%;
+
+  .content-title,
+  .content-body{
+    margin-top: 4rem;
+    line-height: 2;
   }
+
+}
+
+.entry-card{
+  margin-top: 8rem;
 }
