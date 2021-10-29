@@ -31,7 +31,13 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    {{ content_for_header }}
+   
+
+  <!-- Avada Bs FSB Script -->
+ {% include 'avada-bs-fsb-setting' %}
+  <!-- /Avada Bs FSB Script -->
+
+ {{ content_for_header }}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
