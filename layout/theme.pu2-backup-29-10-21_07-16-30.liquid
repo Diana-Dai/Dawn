@@ -7,7 +7,7 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-    <script src="{{ 'glide.min.js' | asset_url }}" async></script>
+    <script src="{{ 'glide.min.js' | asset_url }}"></script>
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
@@ -31,13 +31,7 @@
     {% render 'meta-tags' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-   
-
-  <!-- Avada Bs FSB Script -->
- {% include 'avada-bs-fsb-setting' %}
-  <!-- /Avada Bs FSB Script -->
-
- {{ content_for_header }}
+    {{ content_for_header }}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -128,7 +122,7 @@
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
    {% include 'previewer-head-template' %}
- {% include 'sohead-reply-common' %}</head>
+ </head>
 
   <body class="gradient">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -174,7 +168,5 @@
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
    {% include 'previewer-template' %}
- {% render 'spurit_pu2_theme_snippet' %}
- <div class="index-section--flush powr-popup" id="ae1f729b_1635549018"></div>
- </body> 
+ </body>
 </html>
