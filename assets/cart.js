@@ -71,19 +71,19 @@ class CartItems extends HTMLElement {
       })
       .then((state) => {
         const parsedState = JSON.parse(state);
+        console.log(parsedState)
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartFooter = document.getElementById('main-cart-footer');
 
         if (cartFooter) cartFooter.classList.toggle('is-empty', parsedState.item_count === 0);
 
         this.getSectionsToRender().forEach((section => {
-
           const elementToReplace =
             document.getElementById(section.id).querySelector(section.selector) || document.getElementById(section.id);
           elementToReplace.innerHTML =
             this.getSectionInnerHTML(parsedState.sections[section.section], section.selector);
           }));
-
+          document.getElementById('header__cart--value').innerText = parsedState.total_price / 100 + '.00$';
         this.updateLiveRegions(line, parsedState.item_count);
         const lineItem =  document.getElementById(`CartItem-${line}`);
         if (lineItem && lineItem.querySelector(`[name="${name}"]`)) lineItem.querySelector(`[name="${name}"]`).focus();

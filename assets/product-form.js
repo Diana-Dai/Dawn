@@ -6,8 +6,8 @@ if (!customElements.get('product-form')) {
       this.form = this.querySelector('form');
       this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
       this.cartNotification = document.querySelector('cart-notification');
+      this.bubble = document.getElementById('cart-icon-bubble');
     }
-
     onSubmitHandler(evt) {
       evt.preventDefault();
       const submitButton = this.querySelector('[type="submit"]');
@@ -23,7 +23,7 @@ if (!customElements.get('product-form')) {
       config.headers['X-Requested-With'] = 'XMLHttpRequest';
       config.body = JSON.stringify({
         ...JSON.parse(serializeForm(this.form)),
-        sections: this.cartNotification.getSectionsToRender().map((section) => section.id),
+        sections: this.cartNotification.getSectionsToRender().map((section) => section.id)+',cart-icon-bubble',
         sections_url: window.location.pathname
       });
 
@@ -34,7 +34,8 @@ if (!customElements.get('product-form')) {
             this.handleErrorMessage(response.description);
             return;
           }
-
+          document.getElementById('header__cart--value').innerText = response.final_price / 100 + '.00$';
+          this.bubble.innerHTML = this.getSectionInnerHTML(response.sections['cart-icon-bubble'],".shopify-section");
           this.cartNotification.renderContents(response);
         })
         .catch((e) => {
@@ -44,9 +45,15 @@ if (!customElements.get('product-form')) {
           submitButton.classList.remove('loading');
           submitButton.removeAttribute('aria-disabled');
           this.querySelector('.loading-overlay__spinner').classList.add('hidden');
+
         });
     }
-
+    getSectionInnerHTML(html, selector) {
+      return new DOMParser()
+        .parseFromString(html, 'text/html')
+        .querySelector(selector).innerHTML;
+    }
+  
     handleErrorMessage(errorMessage = false) {
       this.errorMessageWrapper = this.errorMessageWrapper || this.querySelector('.product-form__error-message-wrapper');
       this.errorMessage = this.errorMessage || this.errorMessageWrapper.querySelector('.product-form__error-message');
