@@ -6,6 +6,7 @@
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-qrcode.css' | asset_url | stylesheet_tag }}
 
 <link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -180,6 +181,11 @@
                 </button>
               </quantity-input>
             </div>
+          <button id="get_qr"
+            class="product-form__submit button button--full-width">
+            <span>Get QR code</span>
+          </button>
+          
           {%- when 'popup' -%}
               <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
                 <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.text | default: block.settings.page.title }}</button>
@@ -300,6 +306,7 @@
                 </div>
               </div>
             </noscript>
+
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
               <product-form class="product-form">
@@ -432,7 +439,42 @@
       </div>
     </modal-dialog>
   {%- endfor -%}
+  <div class="qrcode-container">
+    <button class="s-btn" id="close-qrcode"
+    type="button">
+    {% render 'icon-close' %}
+    </button>
+    <div id="qrcode" style="width: 300px;">
+      <span>Scan me to shop now!</span></div>
+    
+  </div>
 </section>
+
+
+<script src="{{ 'qrcode.min.js' | asset_url }}" defer></script>
+
+<script type="text/javascript" defer>
+  window.onload = function () {
+    document.getElementById('get_qr').addEventListener('click',function () {
+      document.querySelector('.qrcode-container').classList.toggle('active');
+      if(document.querySelector('.qrcode-container').querySelector('img')){
+        return
+      }else{
+        new QRCode(document.getElementById("qrcode"), {
+          text: window.location.href,
+          width: 128,
+          height: 128,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.H
+        });
+      }
+      })
+    document.getElementById('close-qrcode').addEventListener('click',function () {
+      document.querySelector('.qrcode-container').classList.remove('active');
+      })
+  }
+</script>
 
 {% javascript %}
   class ProductModal extends ModalDialog {

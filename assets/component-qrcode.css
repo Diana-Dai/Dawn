@@ -1,0 +1,23 @@
+.qrcode-container{
+  display: none;
+  position: absolute;
+  width: 40%;
+  height: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  z-index: 999;
+
+}
+.qrcode-container.active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrcode-container button{
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
