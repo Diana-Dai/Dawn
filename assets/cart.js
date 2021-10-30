@@ -51,6 +51,11 @@ class CartItems extends HTMLElement {
         id: 'main-cart-footer',
         section: document.getElementById('main-cart-footer').dataset.id,
         selector: '.js-contents',
+      },
+      {
+        id: 'header__cart--value',
+        section: 'header__cart--value',
+        selector: '.shopify-section',
       }
     ];
   }
@@ -72,6 +77,7 @@ class CartItems extends HTMLElement {
       .then((state) => {
         const parsedState = JSON.parse(state);
         console.log(parsedState)
+        
         this.classList.toggle('is-empty', parsedState.item_count === 0);
         const cartFooter = document.getElementById('main-cart-footer');
 
@@ -83,7 +89,6 @@ class CartItems extends HTMLElement {
           elementToReplace.innerHTML =
             this.getSectionInnerHTML(parsedState.sections[section.section], section.selector);
           }));
-          document.getElementById('header__cart--value').innerText = parsedState.total_price / 100 + '.00$';
         this.updateLiveRegions(line, parsedState.item_count);
         const lineItem =  document.getElementById(`CartItem-${line}`);
         if (lineItem && lineItem.querySelector(`[name="${name}"]`)) lineItem.querySelector(`[name="${name}"]`).focus();

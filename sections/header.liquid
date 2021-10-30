@@ -481,7 +481,7 @@
           </span>
         </a>
       {%- endif -%}
-      <span id="header__cart--value" class="header__cart--value">{{ cart.total_price | money_without_currency }}$</span>
+      <span id="header__cart--value" class="header__cart--value">{{ cart.total_price | money }}</span>
       <a href="{{ routes.cart_url }}" class="header__cart--wrapper header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
          {% render 'icon-cart' %}
           <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>

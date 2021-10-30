@@ -7,6 +7,7 @@ if (!customElements.get('product-form')) {
       this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
       this.cartNotification = document.querySelector('cart-notification');
       this.bubble = document.getElementById('cart-icon-bubble');
+      this.cart = document.getElementById('header__cart--value');
     }
     onSubmitHandler(evt) {
       evt.preventDefault();
@@ -23,7 +24,7 @@ if (!customElements.get('product-form')) {
       config.headers['X-Requested-With'] = 'XMLHttpRequest';
       config.body = JSON.stringify({
         ...JSON.parse(serializeForm(this.form)),
-        sections: this.cartNotification.getSectionsToRender().map((section) => section.id)+',cart-icon-bubble',
+        sections: this.cartNotification.getSectionsToRender().map((section) => section.id)+',cart-icon-bubble,header__cart--value',
         sections_url: window.location.pathname
       });
 
@@ -34,8 +35,8 @@ if (!customElements.get('product-form')) {
             this.handleErrorMessage(response.description);
             return;
           }
-          document.getElementById('header__cart--value').innerText = response.final_price / 100 + '.00$';
           this.bubble.innerHTML = this.getSectionInnerHTML(response.sections['cart-icon-bubble'],".shopify-section");
+          this.cart.innerHTML = this.getSectionInnerHTML(response.sections['header__cart--value'],".shopify-section");
           this.cartNotification.renderContents(response);
         })
         .catch((e) => {
@@ -45,7 +46,6 @@ if (!customElements.get('product-form')) {
           submitButton.classList.remove('loading');
           submitButton.removeAttribute('aria-disabled');
           this.querySelector('.loading-overlay__spinner').classList.add('hidden');
-
         });
     }
     getSectionInnerHTML(html, selector) {
