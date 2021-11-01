@@ -41,6 +41,7 @@
             {%- for filter in results.filters -%}
               {%- assign total_active_values = total_active_values | plus: filter.active_values.size -%}
               {% case filter.type %}
+             
               {% when 'list' %}
                 <details class="disclosure-has-popup facets__disclosure js-filter" data-index="{{ forloop.index }}">
                   <summary class="facets__summary caption-large focus-offset">
@@ -94,6 +95,24 @@
                           </label>
                         </li>
                       {%- endfor -%}
+                    </ul>
+                  </div>
+                </details>
+                <details class="disclosure-has-popup facets__disclosure js-filter" data-index="Color">
+                  <summary class="facets__summary caption-large focus-offset">
+                    <div>
+                      <span>Color</span>
+                      {% render 'icon-caret' %}
+                    </div>
+                  </summary>
+                  <div class="facets__display">
+                    <ul class="facets__list list-unstyled" role="list">
+                        <li class="list-menu__item facets__item facet-checkbox">
+                          {{ 'black' | link_to_tag: 'black' }}
+                        </li>
+                        <li class="list-menu__item facets__item facet-checkbox">
+                          {{ 'white' | link_to_tag: 'white' }}
+                        </li>
                     </ul>
                   </div>
                 </details>
