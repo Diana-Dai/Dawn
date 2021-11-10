@@ -1,0 +1,278 @@
+<style>
+  .mobile-local-navigation{
+    width: 100%;
+    z-index: 2;
+    position: sticky;
+  }
+  .mobile-local-navigation__title {
+    display: flex;
+    background: #fff;
+    overflow: hidden;
+    font-size: 0.96rem;
+    letter-spacing: .2px;
+    text-transform: none;
+    height: 49px;
+    line-height: 49px;
+    border-bottom: 1px solid #d5d4d0;
+    border-top: 1px solid #d5d4d0;
+  }
+  .mobile-local-navigation__title .icon{
+    width: 10px;
+  }
+  .mobile-local-navigation__category-title{
+    position: relative;
+  }
+  .mobile-local-navigation__category-title > div{
+    margin-right: 12px;
+  }
+  .mobile-local-navigation__category-title::before,
+  .mobile-local-navigation__category-title::after{
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+  }
+  .mobile-local-navigation__category-title::before{
+    border-color: transparent transparent transparent #d5d4d0;
+    border-width: 25px 25px 25px 15px;
+    margin-top: -25px;
+  }
+  .mobile-local-navigation__category-title::after{
+    border-color: rgba(136,183,213,0) rgba(136,183,213,0) rgba(136,183,213,0) #fff;
+    border-width: 24px 24px 24px 14px;
+    margin-top: -24px;
+  }
+  .mobile-local-navigation__subcategory-title{
+    margin-left: 25px;
+  }
+  .mobile-local-navigation__category-title *,
+  .mobile-local-navigation__subcategory-title *{
+    pointer-events: none;
+  }
+  .mobile-local-navigation__category-title.is_open svg,
+  .mobile-local-navigation__subcategory-title.is_open svg{
+    transform: rotate(180deg);
+  }
+  .mobile-local-navigation__flyout-overlay,
+  .mobile-local-navigation__category-flyout,
+  .mobile-local-navigation__flyout-content{
+    display: none;
+  }
+  .is_open .mobile-local-navigation__flyout-overlay,
+  .is_open .mobile-local-navigation__category-flyout,
+  .mobile-local-navigation__flyout-content.is_open{
+    display: block;
+  }
+  .mobile-local-navigation__flyout-overlay{
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background: #000;
+    opacity: .5;
+    min-height: 100vh;
+  }
+  .mobile-local-navigation__category-flyout{
+    border-radius: 3px;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,.3),0 0 0 1px rgba(0,0,0,.1);
+    z-index: 100000;
+    background: #fff;
+    color: #403e3b;
+    margin: 16px 12px 0;
+    position: absolute;
+    width: calc(100vw - 24px);
+  }
+  .mobile-local-navigation__flyout-content::before{
+    content: "";
+    box-shadow: -2px -2px 2px 0 rgba(0,0,0,.1),-1px -1px 0 0 rgba(0,0,0,.2);
+    background: #fcfcfa;
+    position: absolute;
+    top: -5px;
+    left: 120px;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+  }
+  .mobile-local-navigation__flyout-content.main-navigation::before{
+    left: 50px;
+  }
+  .mobile-local-navigation__flyout-content{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    z-index: 1;
+  }
+  .mobile-local-navigation__flyout-row{
+    font-size: 1.25rem;
+    letter-spacing: .2px;
+    text-transform: none;
+    margin: 0 15px;
+    line-height: 43px;
+    display: block;
+  }
+</style>
+{% for link in main_menu.links %} {% if link.current == true %}
+{% if link.links != blank %}
+  {% assign showMobileNavigation = true %}
+
+  {% for childlink in link.links %}
+    {% if forloop.first %}
+      {% assign firstSubLinkTitle = childlink.title %}
+    {% endif %}
+  {% endfor %}
+
+  {% endif %}
+
+  {% assign currentLinkTitle = link.title %}
+{% endif %} 
+
+
+{% endfor %}
+
+
+
+{% if showMobileNavigation %}
+<div class="mobile-only mobile-local-navigation">
+  <div class="mobile-local-navigation__title page-width">
+    <div class="layout-cell mobile-local-navigation__category-title">
+      <div>
+        {{ currentLinkTitle }}
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          role="presentation"
+          class="icon icon--wide icon-chevron-down"
+          viewBox="0 0 28 16"
+        >
+          <path
+            d="M1.57 1.59l12.76 12.77L27.1 1.59"
+            stroke-width="2"
+            stroke="#000"
+            fill="none"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      class="layout-cell--expanding mobile-local-navigation__subcategory-title"
+    >
+
+      <div><span id="current-title">
+        {{firstSubLinkTitle}}
+      </span>
+        <svg
+        aria-hidden="true"
+        focusable="false"
+        role="presentation"
+        class="icon icon--wide icon-chevron-down"
+        viewBox="0 0 28 16"
+      >
+        <path
+          d="M1.57 1.59l12.76 12.77L27.1 1.59"
+          stroke-width="2"
+          stroke="#000"
+          fill="none"
+          fill-rule="evenodd"
+        />
+      </svg>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-local-navigation__flyout-overlay"></div>
+  <div class="mobile-local-navigation__category-flyout">
+  </div>
+</div>
+{% endif %}
+
+
+<script defer>
+  
+$('.mobile-local-navigation__title').on('click',function (e) {
+  let mainCategoryIsOpen = false;
+  let subCategoryIsOpen = false;
+  const container = $('.mobile-local-navigation');
+  const mainCategory = $('.mobile-local-navigation__category-title');
+  const subCategory = $('.mobile-local-navigation__subcategory-title');
+  const flyOut = $('.mobile-local-navigation__flyout-overlay');
+  
+  // When click the main category
+  if($(e.target).hasClass('mobile-local-navigation__category-title')){
+    $(e.target).toggleClass('is_open');
+    removeCls(subCategory, 'is_open')
+    if (mainCategory.hasClass('is_open')) {
+      mainCategoryIsOpen = true;
+      subCategoryIsOpen = false;
+    }
+  }
+
+  // When click the sub category
+  if($(e.target).hasClass('mobile-local-navigation__subcategory-title')){
+    $(e.target).toggleClass('is_open');
+    removeCls(mainCategory, 'is_open')
+    if (subCategory.hasClass('is_open')) {
+      mainCategoryIsOpen = false;
+      subCategoryIsOpen = true;
+    }
+  }
+
+
+  if(mainCategoryIsOpen || subCategoryIsOpen){
+    $('body').css('overflow-y', 'hidden');
+    container.addClass('is_open');
+    if(mainCategoryIsOpen){
+      $('.mobile-local-navigation .main-navigation').addClass('is_open');
+      removeCls($('.mobile-local-navigation .sub-navigation'), 'is_open')
+    }else{
+      $('.mobile-local-navigation .sub-navigation').addClass('is_open');
+      removeCls($('.mobile-local-navigation .main-navigation'), 'is_open');
+    }
+    return;
+  }
+  closeNavgation();
+})
+
+function closeNavgation() {
+  removeCls($('.mobile-local-navigation'), 'is_open');
+  $('body').css('overflow-y', 'auto');
+  removeCls($('.mobile-local-navigation .sub-navigation'), 'is_open');
+  removeCls($('.mobile-local-navigation .main-navigation'), 'is_open');
+  removeCls($('.mobile-local-navigation__subcategory-title'),'is_open');
+}
+
+function removeCls(target, cls) {
+  if(target.hasClass(cls)){
+    target.removeClass(cls);
+  }
+}
+
+const createNavigationList = function (target, cls) {
+  const container = $('.mobile-local-navigation__category-flyout');
+  const wrapper = $(`<div class="mobile-local-navigation__flyout-content ${cls}"></div>`);
+  const mainCategoryTags = $(target);
+  console.log(mainCategoryTags);
+  mainCategoryTags.each((index, item)=>{
+    const node = $(item).clone();
+    node.attr('class', 'mobile-local-navigation__flyout-row');
+    if(node.find('svg')){
+      node.find('svg').remove();
+    }
+    wrapper.append(node)
+  })
+  container.append(wrapper);
+};
+
+$(document).ready(function () {
+  createNavigationList('.site-navigation .site-nav__link', 'main-navigation');
+  createNavigationList('.sidebar .main-link','sub-navigation');
+  $('.mobile-local-navigation__flyout-content').on('click',function () {
+    closeNavgation();
+  })
+
+})
+
+
+</script>

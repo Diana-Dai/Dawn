@@ -1,0 +1,25 @@
+<div class="js-qty__wrapper">
+  <input type="text" id="Quantity-{{ id }}" data-id="{{ id }}"
+    class="js-qty__num RQuantity-{{ id }}"
+    value="{{ qty }}"
+    min="{{ min }}"
+    aria-label="quantity"
+    pattern="[0-9]*"
+    name="yquantity">
+   <div class="quantity_message">
+      <span>Added</span>
+      <span>In Your Basket</span>
+   </div>
+  <button type="button" data-id="{{ id }}"
+    class="js-qty__adjust js-qty__adjust--minus rqtyup quick-add-button add-button-remove"
+    aria-label="{{ 'cart.general.reduce_quantity' | t }}">
+    <div class="product-tile__quick-add-minus"></div>
+    <i class="fa fa-spinner fa-spin" style="display: none;"></i>
+  </button>
+  <button type="button" data-id="{{ id }}"
+    class="js-qty__adjust js-qty__adjust--plus rqtyup quick-add-button add-button-add"
+    aria-label="{{ 'cart.general.increase_quantity' | t }}">
+    <div class="product-tile__quick-add-plus"></div>
+    <i class="fa fa-spinner fa-spin" style="display: none;"></i>
+  </button>
+</div>
