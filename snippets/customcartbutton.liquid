@@ -1,0 +1,123 @@
+
+<div id="ProductSection-{{ section_id }}" class="product-section d_buttonsec " data-section-id="{{ section_id }}" data-section-type="product-template" {% if settings.product_zoom_enable %} data-image-zoom="true" {% endif %} {% if settings.inventory_enable %} data-inventory="true" {% endif %} {% if settings.inventory_transfers_enable %} data-incoming-inventory="true" {% endif %} {% unless isModal %} data-enable-history-state="true" {% endunless %}>
+
+  {% capture form_id %}AddToCartForm-{{ section_id }}
+  {% endcapture %}
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+
+  {% if current_variant.available %}
+    {% form 'product', product, data-productid: product.id, id: form_id, class: 'product-single__form' %}
+
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          {% if settings.variant_type == 'button' %}
+            {% include 'variant-button', section_id: section_id, option_drop: option %}
+          {% else %}
+            {% include 'variant-dropdown', section_id: section_id %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      <select name="id" data-productid="{{ product.id }}" id="ProductSelect-{{ section_id }}" class="product-single__variants no-js">
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
+              {{ variant.title }}
+              -
+              {{ variant.price | money_with_currency }}
+            </option>
+          {% else %}
+            <option disabled="disabled">
+              {{ variant.title }}
+              -
+              {{ 'products.product.sold_out' | t }}
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+
+      <!-- Quantity Button -->
+      {% assign has_y = 0 %}
+
+      {% for item in cart.items %}
+        {% if item.product.variants[0].id == section_id %}
+          {% assign has_y = has_y | plus: 1 %}
+          {% if item.quantity>0 %}
+            {% assign has_q =  item.quantity %}
+          {% else %}
+            {% assign has_q =  1 %}
+          {% endif %}
+          <div class="RProductSectionQty-{{ section_id }} product__quantity product__quantity--{{ settings.variant_type }}" id="RProductSectionQty-{{ section_id }}">
+            <!--<label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>-->
+            {% include 'qtybox', id: section_id, qty: has_q, min: 0 , ivalue: has_q %}
+          </div>
+
+        {% endif %}
+
+      {% endfor %}
+
+
+      {% if has_y < 1 %}
+        <div class="RProductSectionQty-{{ section_id }} product__quantity product__quantity--{{ settings.variant_type }}" id="RProductSectionQty-{{ section_id }}" style="display:none;">
+          <!--<label for="Quantity-{{ section_id }}">{{ 'products.product.quantity' | t }}</label>-->
+          {% include 'qtybox', id: section_id, qty: 1, min: 0 %}
+        </div>
+        <!--  End Quantity Button -->
+        {%- assign enable_dynamic_buttons = false -%}
+        {% if settings.enable_payment_button and template != 'product.preorder' %}
+          {%- assign enable_dynamic_buttons = true -%}
+        {% endif %}
+        <button {% if product.empty? %} type="button" {% else %} type="button" {% endif %} name="add" id="AddToCart-{{ section_id }}" data-id="{{ section_id }}" class="AddToCart-{{ section_id }} d_btncart {% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full btn--no-animate add-to-cart" {% unless current_variant.available %} disabled="disabled" {% endunless %}>
+          <div class="product-tile__quick-add-plus"></div>
+          <!-- <span id="AddToCartText-{{ section_id }}">
+            {% if current_variant.available %}
+              {% if template == 'product.preorder' %}
+                {{ 'products.product.preorder' | t }}
+              {% else %}
+                {{ 'products.product.add_to_cart' | t }}
+              {% endif %}
+            {% else %}
+              {{ 'products.product.sold_out' | t }}
+            {% endif %}
+          </span> -->
+                    <!-- <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+        </button>
+      {% endif %}
+
+      {% if has_y >= 1 %}
+        <button
+            style="display:none;"
+            {% if product.empty? %}type="button"{% else %}type="button"{% endif %}
+            name="add"
+            id="AddToCart-{{ section_id }}"
+            data-id="{{ section_id }}"
+            class="AddToCart-{{ section_id }} d_btncart {% if enable_dynamic_buttons %}btn--tertiary{% else %}btn{% endif %} btn--full btn--no-animate add-to-cart"
+            {% unless current_variant.available %} disabled="disabled"{% endunless %}>
+            <div class="product-tile__quick-add-plus"></div>
+            <!-- <span id="AddToCartText-{{ section_id }}">
+              {% if current_variant.available %}
+                {% if template == 'product.preorder' %}
+                  {{ 'products.product.preorder' | t }}
+                {% else %}
+                  {{ 'products.product.add_to_cart' | t }}
+                {% endif %}
+              {% else %}
+                {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+          </button>
+    {% endif %}
+
+
+      <div aria-hidden="true" class="hide" id="VariantsJson-{{ section_id }}">
+        {{ product.variants | json }}
+      </div>
+      {% if product.options.size > 1 %}
+        <div aria-hidden="true" class="hide" id="CurrentVariantJson-{{ section_id }}">
+          {{ current_variant | json }}
+        </div>
+      {% endif %}
+    {% endform %}
+  {% endif %}
+</div>

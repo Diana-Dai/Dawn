@@ -1,706 +1,366 @@
-<link rel="stylesheet" href="{{ 'component-list-menu.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- if settings.predictive_search_enabled -%}
-  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="{{ 'component-loading-overlay.css' | asset_url }}" media="print" onload="this.media='all'">
-{%- endif -%}
+{%- assign main_menu = linklists[section.settings.main_menu_link_list] -%}
 
-<noscript>{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-search.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
+{%- assign logo_alignment = 'left' -%}
+{% if section.settings.main_menu_alignment == 'center-left' or section.settings.main_menu_alignment == 'center-split' or section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-drawer' %}
+  {%- assign logo_alignment = 'center' -%}
+{% endif %}
 
-<style>
-  a {
-    text-decoration: none;
+{% include 'drawer-menu' %}
+{% include 'cart-drawer' %}
+
+{%- assign template_name = template | replace: '.', ' ' | truncatewords: 2, '' | handle -%}
+
+{%- assign sticky_header = false -%}
+{% if section.settings.header_style == 'sticky' %}
+  {%- assign sticky_header = true -%}
+{% endif %}
+{%- assign overlay_header = false -%}
+{%- assign has_logo = false -%}
+{% if template_name == 'index' and section.settings.sticky_index %}
+  {%- assign overlay_header = true -%}
+{% endif %}
+{% if template_name == 'collection' and collection.image and section.settings.sticky_collection %}
+  {%- assign overlay_header = true -%}
+{% endif %}
+
+{% style %}
+  .site-nav__link,
+  .site-nav__dropdown-link {
+    font-size: 17px;
   }
-  header-drawer {
-    justify-self: start;
-    margin-left: -1.2rem;
-  }
 
-  @media screen and (min-width: 990px) {
-    header-drawer {
-      display: none;
+  {% if section.settings.type_navigation_size < 18 %}
+    .site-nav__link {
+      padding-left: 8px;
+      padding-right: 8px;
     }
-  }
+  {% endif %}
+{% endstyle %}
 
-  .menu-drawer-container {
-    position: relative;
-    display: flex;
-  }
+<div data-section-id="{{ section.id }}" data-section-type="header-section">
+  <div class="header-wrapper{% if overlay_header %} header-wrapper--overlay is-light{% endif %}">
 
-  .list-menu {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+    {% if section.settings.show_announcement %}
+      {% include 'announcement-bar' %}
+    {% endif %}
 
-  .list-menu--inline {
-    display: inline-flex;
-    flex-wrap: wrap;
-  }
+    <header
+      class="site-header{%if section.settings.type_navigation_style %} site-header--heading-style{% endif %}"
+      data-sticky="{{ sticky_header }}"
+      data-overlay="{{ overlay_header }}">
+      <div class="page-width">
+        <div
+          class="header-layout header-layout--{{ section.settings.main_menu_alignment }}"
+          data-logo-align="{{ logo_alignment }}">
 
-  summary.list-menu__item {
-    padding-right: 2.7rem;
-  }
+          {% if logo_alignment == 'left' %}
+            <div class="header-item header-item--logo">
+              {% include 'header-logo-block' %}
+            </div>
+          {% endif %}
 
-  .list-menu__item {
-    display: flex;
-    align-items: center;
-    line-height: 1.3;
-  }
+          {% if logo_alignment == 'left' and section.settings.menu_alignment == 'left' %}
+            <div class="header-item header-item--navigation{% if section.settings.main_menu_alignment == 'left-center' %} text-center{% endif %}">
+              {% include 'header-desktop-nav' %}
+            </div>
+          {% endif %}
 
-  .list-menu__item--link {
-    text-decoration: none;
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    line-height: 1.8;
-  }
+          {% if logo_alignment == 'center' %}
+            <div class="header-item header-item--left header-item--navigation">
+              <div class="site-nav{% unless section.settings.main_menu_alignment == 'center-drawer' %} large-up--hide{% endunless %}">
+                <button
+                  type="button"
+                  class="site-nav__link site-nav__link--icon js-drawer-open-nav"
+                  aria-controls="NavDrawer">
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger" viewBox="0 0 64 64"><path d="M7 15h51M7 32h43M7 49h51"/></svg>
+                  <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+                </button>
+              </div>
 
-  @media screen and (min-width: 750px) {
-    .list-menu__item--link {
-      padding-bottom: 0.5rem;
-      padding-top: 0.5rem;
-    }
-  }
-</style>
+              {% if section.settings.main_menu_alignment != 'center-split' %}
+              <div class="header-item header-item--logo">
+                {% include 'header-logo-block' %}
+              </div>
+            {% endif %}
+            </div>
 
-<script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
-<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+            {% if section.settings.main_menu_alignment == 'center-split' %}
+              {% include 'header-split-nav' %}
+            {% endif %}
 
-<svg xmlns="http://www.w3.org/2000/svg" class="hidden">
-  <symbol viewBox="0 0 1024 1024" fill="currentColor" id="icon-search" >
-    <path d="M910 855 650 595a297 297 0 0 0-26-395 298 298 0 0 0-424 0 298 298 0 0 0 0 424 298 298 0 0 0 395 26l259 260c4 3 9 3 12 0l44-44c3-3 3-8 0-11zM570 570a223 223 0 0 1-316 0 223 223 0 0 1 0-316 223 223 0 0 1 316 0 223 223 0 0 1 0 316z"/>
-    </symbol>
-
-  <symbol id="icon-close" class="icon icon-close" fill="none" viewBox="0 0 18 17">
-    <path d="M.865 15.978a.5.5 0 00.707.707l7.433-7.431 7.579 7.282a.501.501 0 00.846-.37.5.5 0 00-.153-.351L9.712 8.546l7.417-7.416a.5.5 0 10-.707-.708L8.991 7.853 1.413.573a.5.5 0 10-.693.72l7.563 7.268-7.418 7.417z" fill="currentColor">
-  </symbol>
-</svg>
-
-<{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %} class="header-wrapper {% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}">
-  <header class="header header--{{ section.settings.logo_position }} page-width{% if section.settings.menu != blank %} header--has-menu{% endif %}">
-    {%- if section.settings.menu != blank -%}
-      <header-drawer data-breakpoint="tablet">
-        <details class="menu-drawer-container">
-          <summary class="header__icon header__icon--menu header__icon--summary link focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
-            <span>
-              {% render 'icon-hamburger' %}
-              {% render 'icon-close' %}
-            </span>
-          </summary>
-          <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
-            <div class="menu-drawer__inner-container">
-              <div class="menu-drawer__navigation-container">
-                <nav class="menu-drawer__navigation">
-                  <ul class="menu-drawer__menu list-menu" role="list">
-                    {%- for link in section.settings.menu.links -%}
-                      <li>
-                        {%- if link.links != blank -%}
-                          <details>
-                            <summary class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
-                              {{ link.title | escape }}
-                              {% render 'icon-arrow' %}
-                              {% render 'icon-caret' %}
-                            </summary>
-                            <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu motion-reduce" tabindex="-1">
-                              <div class="menu-drawer__inner-submenu">
-                                <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
-                                  {% render 'icon-arrow' %}
-                                  {{ link.title | escape }}
-                                </button>
-                                <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
-                                  {%- for childlink in link.links -%}
-                                    <li>
-                                      {%- if childlink.links == blank -%}
-                                        <a href="{{ childlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
-                                          {{ childlink.title | escape }}
-                                        </a>
-                                      {%- else -%}
-                                        <details>
-                                          <summary class="menu-drawer__menu-item link link--text list-menu__item focus-inset">
-                                            {{ childlink.title | escape }}
-                                            {% render 'icon-arrow' %}
-                                            {% render 'icon-caret' %}
-                                          </summary>
-                                          <div id="childlink-{{ childlink.title | escape }}" class="menu-drawer__submenu motion-reduce">
-                                            <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true">
-                                              {% render 'icon-arrow' %}
-                                              {{ childlink.title | escape }}
-                                            </button>
-                                            <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
-                                              {%- for grandchildlink in childlink.links -%}
-                                                <li>
-                                                  <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
-                                                    {{ grandchildlink.title | escape }}
-                                                  </a>
-                                                </li>
-                                              {%- endfor -%}
-                                            </ul>
-                                          </div>
-                                        </details>
-                                      {%- endif -%}
-                                    </li>
-                                  {%- endfor -%}
-                                </ul>
-                              </div>
-                            </div>
-                          </details>
-                        {%- else -%}
-                          <a href="{{ link.url }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
-                            {{ link.title | escape }}
-                          </a>
-                        {%- endif -%}
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </nav>
-                <div class="menu-drawer__utility-links">
-                  {%- if shop.customer_accounts_enabled -%}
-                    <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account link focus-inset h5">
-                      {% render 'icon-account' %}
-                      {%- liquid
-                        if customer
-                          echo 'customer.account_fallback' | t
-                        else
-                          echo 'customer.log_in' | t
-                        endif
-                      -%}
-                    </a>
-                  {%- endif -%}
-                  <ul class="list list-social list-unstyled" role="list">
-                    {%- if settings.social_twitter_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_twitter_link }}" class="list-social__link link">
-                          {%- render 'icon-twitter' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.twitter' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_facebook_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_facebook_link }}" class="list-social__link link">
-                          {%- render 'icon-facebook' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.facebook' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_pinterest_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_pinterest_link }}" class="list-social__link link">
-                          {%- render 'icon-pinterest' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.pinterest' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_instagram_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
-                          {%- render 'icon-instagram' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_tiktok_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_tiktok_link }}" class="list-social__link link">
-                          {%- render 'icon-tiktok' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.tiktok' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_tumblr_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_tumblr_link }}" class="list-social__link link">
-                          {%- render 'icon-tumblr' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.tumblr' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_snapchat_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_snapchat_link }}" class="list-social__link link">
-                          {%- render 'icon-snapchat' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.snapchat' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_youtube_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_youtube_link }}" class="list-social__link link">
-                          {%- render 'icon-youtube' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.youtube' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                    {%- if settings.social_vimeo_link != blank -%}
-                      <li class="list-social__item">
-                        <a href="{{ settings.social_vimeo_link }}" class="list-social__link link">
-                          {%- render 'icon-vimeo' -%}
-                          <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
-                        </a>
-                      </li>
-                    {%- endif -%}
-                  </ul>
-                </div>
+                
+              {% if section.settings.main_menu_alignment == 'center' or section.settings.main_menu_alignment == 'center-split' %}
+                {% if settings.search_enable %}
+           <form action="{{ routes.search_url }}" method="get" id="HeaderSearchForms" class="medium-down--hide site-header__search-form HeaderSearchForm" role="search">
+              <input type="hidden" name="type" value="{{ settings.search_type }}">
+              <button type="submit" class="text-link site-header__search-btn">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/></svg>
+                <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+              </button>
+              <input type="search" name="q" value="{{ search.terms | escape | replace: '*', '' }}" placeholder="{{ 'general.search.placeholder' | t }}" class="site-header__search-input" aria-label="{{ 'general.search.placeholder' | t }}">
+            </form>
+          {%- if settings.predictive_search_enabled -%}
+          <div class="predictive-results hide">
+            <div class="page-width">
+              <div class="PredictiveResults"></div>
+              <div class="text-center predictive-results__footer">
+                <button type="button" class="btn btn--small" data-predictive-search-button>
+                  <small>
+                    {{ 'general.search.view_more' | t }}
+                  </small>
+                </button>
               </div>
             </div>
           </div>
-        </details>
-      </header-drawer>
-    {%- endif -%}
-
-    {%- if section.settings.logo_position == 'top-center' or section.settings.menu == blank -%}
-      <details-modal class="header__search">
-        <details>
-          <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-            <span>
-              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-search">
-              </svg>
-              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-close">
-              </svg>
-            </span>
-          </summary>
-          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
-            <div class="modal-overlay"></div>
-            <div class="search-modal__content" tabindex="-1">
-              {%- if settings.predictive_search_enabled -%}
-                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
-              {%- endif -%}
-                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-                  <div class="field">
-                    <input class="search__input field__input" 
-                      id="Search-In-Modal-1"
-                      type="search"
-                      name="q"
-                      value=""
-                      placeholder="{{ 'general.search.search' | t }}"
-                      {%- if settings.predictive_search_enabled -%}
-                        role="combobox"
-                        aria-expanded="false"
-                        aria-owns="predictive-search-results-list"
-                        aria-controls="predictive-search-results-list"
-                        aria-haspopup="listbox"
-                        aria-autocomplete="list"
-                        autocorrect="off"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        spellcheck="false" 
-                      {%- endif -%}
-                    >
-                    <label class="field__label" for="Search-In-Modal-1">{{ 'general.search.search' | t }}</label>
-                    <input type="hidden" name="options[prefix]" value="last">
-                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
-                        <use href="#icon-search">
-                      </svg>
-                    </button> 
+        {%- endif -%}
+           {% comment %}       
+          <div class="site-nav medium-down--hide">
+                    <a href="{{ routes.search_url }}" class="site-nav__link site-nav__link--icon js-search-header js-no-transition">
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/></svg>
+                      <span class="icon__fallback-text">{{ 'general.search.title' | t }}</span>
+                    </a>
                   </div>
-                  
-                  {%- if settings.predictive_search_enabled -%}
-                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
-                      <div class="predictive-search__loading-state">
-                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                        </svg>
-                      </div>
-                    </div>
+          {% endcomment %}
+                {% endif %}
+              {% endif %}
 
-                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
-                  {%- endif -%}
-                </form>
-              {%- if settings.predictive_search_enabled -%}
-                </predictive-search>
-              {%- endif -%} 
-              <button type="button" class="modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
-                <svg class="icon icon-close" aria-hidden="true" focusable="false" role="presentation">
-                  <use href="#icon-close">
-                </svg>
+              {% if section.settings.main_menu_alignment == 'center-left' %}
+                {% include 'header-desktop-nav' %}
+              {% endif %}
+            
+          {% endif %}
+
+          <div class="header-item header-item--icons">
+            {% include 'header-icons' %}
+          </div>
+        </div>
+
+        
+      </div>
+      <div class="site-header__search-container">
+        <div class="site-header__search">
+          <div class="page-width">
+             <form action="{{ routes.search_url }}" method="get" id="HeaderSearchForm" class="site-header__search-form" role="search">
+              <input type="hidden" name="type" value="{{ settings.search_type }}">
+              <button type="submit" class="text-link site-header__search-btn">
+                <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/></svg>
+                <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
               </button>
+              <input type="search" name="q" value="{{ search.terms | escape | replace: '*', '' }}" placeholder="{{ 'general.search.placeholder' | t }}" class="site-header__search-input" aria-label="{{ 'general.search.placeholder' | t }}">
+            </form>
+            <button type="button" class="js-search-header-close text-link site-header__search-btn">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
+              <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
+            </button>
+          </div>
+        </div>
+         {%- if settings.predictive_search_enabled -%}
+          <div class="predictive-results hide">
+            <div class="page-width">
+              <div id="PredictiveResults"></div>
+              <div class="text-center predictive-results__footer">
+                <button type="button" class="btn btn--small" data-predictive-search-button>
+                  <small>
+                    {{ 'general.search.view_more' | t }}
+                  </small>
+                </button>
+              </div>
             </div>
           </div>
-        </details>
-      </details-modal>
-    {%- endif -%}
+        {%- endif -%}
+      </div>
+      {% if section.settings.main_menu_alignment == 'center' %}
+      <div class="text-center">
+        {% include 'header-desktop-nav' %}
+      </div>
+      {% endif %}
+      {% include 'header-mobile-nav' %}
+    </header>
 
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header__heading">
-    {%- endif -%}
-        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-          {%- if section.settings.logo != blank -%}
-            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-            <img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-              src="{{ section.settings.logo | img_url: image_size }}"
-              loading="lazy"
-              class="header__heading-logo"
-              width="{{ section.settings.logo.width }}"
-              height="{{ section.settings.logo.height }}"
-              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
-            >
-          {%- else -%}
-            <span class="h2">{{ shop.name }}</span>
-          {%- endif -%}
-        </a>
-    {%- if request.page_type == 'index' -%}
-      </h1>
-    {%- endif -%}
-
-    {%- if section.settings.menu != blank -%}
-      <nav class="header__inline-menu">
-        <ul class="list-menu list-menu--inline" role="list">
-          {%- for link in section.settings.menu.links -%}
-            <li>
-              {%- if link.links != blank -%}
-                <details-disclosure>
-                  <details>
-                    <summary class="header__menu-item list-menu__item link focus-inset">
-                      <span {%- if link.child_active %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
-                      {% render 'icon-caret' %}
-                    </summary>
-                    <ul class="header__submenu list-menu list-menu--disclosure caption-large motion-reduce" role="list" tabindex="-1">
-                      {%- for childlink in link.links -%}
-                        <li>
-                          {%- if childlink.links == blank -%}
-                            <a href="{{ childlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
-                              {{ childlink.title | escape }}
-                            </a>
-                          {%- else -%}
-                            <details>
-                              <summary class="header__menu-item link link--text list-menu__item focus-inset caption-large">
-                                {{ childlink.title | escape }}
-                                {% render 'icon-caret' %}
-                              </summary>
-                              <ul class="header__submenu list-menu motion-reduce">
-                                {%- for grandchildlink in childlink.links -%}
-                                  <li>
-                                    <a href="{{ grandchildlink.url }}" class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
-                                      {{ grandchildlink.title | escape }}
-                                    </a>
-                                  </li>
-                                {%- endfor -%}
-                              </ul>
-                            </details>
-                          {%- endif -%}
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                  </details>
-                </details-disclosure>
-              {%- else -%}
-                <a href="{{ link.url }}" class="header__menu-item header__menu-item list-menu__item link link--text focus-inset"{% if link.current %} aria-current="page"{% endif %}>
-                  <span {%- if link.current %} class="header__active-menu-item"{% endif %}>{{ link.title | escape }}</span>
-                </a>
-              {%- endif -%}
-            </li>
-          {%- endfor -%}
-        </ul>
-      </nav>
-    {%- endif -%}
-
-    <div class="header__icons ">
-      <details-modal class="header__search">
-        <details>
-          <summary class="header__icon header__icon--search header__icon--summary link focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
-              <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-search">
-              </svg>
-          </summary>
-          <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
-            <div class="modal-overlay"></div>
-            <div class="search-modal__content">
-              {%- if settings.predictive_search_enabled -%}
-                <predictive-search class="search-modal__form" data-loading-text="{{ 'accessibility.loading' | t }}">
-              {%- endif -%} 
-                <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
-                  <div class="field">
-                    <input class="search__input field__input" 
-                      id="Search-In-Modal"
-                      type="search"
-                      name="q"
-                      value=""
-                      placeholder="{{ 'general.search.search' | t }}"
-                      {%- if settings.predictive_search_enabled -%}
-                        role="combobox"
-                        aria-expanded="false"
-                        aria-owns="predictive-search-results-list"
-                        aria-controls="predictive-search-results-list"
-                        aria-haspopup="listbox"
-                        aria-autocomplete="list"
-                        autocorrect="off"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        spellcheck="false" 
-                      {%- endif -%}
-                    >
-                    <input type="hidden" name="options[prefix]" value="last">
-                    <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
-                      <svg class="icon icon-search" aria-hidden="true" focusable="false" role="presentation">
-                        <use href="#icon-search">
-                      </svg>
-                    </button> 
-                  </div>
-                  
-                  {%- if settings.predictive_search_enabled -%}
-                    <div class="predictive-search predictive-search--header" tabindex="-1" data-predictive-search>
-                      <div class="predictive-search__loading-state">
-                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                        </svg>
-                      </div>
-                    </div>
-                    <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
-                  {%- endif -%}
-                </form>
-              {%- if settings.predictive_search_enabled -%}
-                </predictive-search>
-              {%- endif -%}
-              <button type="button" class="s-btn search-modal__close-button modal__close-button link link--text focus-inset" aria-label="{{ 'accessibility.close' | t }}">
-                {% render 'icon-close' %}
-              </button>
-            </div>
-          </div>
-        </details>
-      </details-modal>
-      {%- if shop.customer_accounts_enabled -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}">
-          {% render 'icon-account' %}
-          <span class="visually-hidden">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
-      {%- endif -%}
-      <span id="header__cart--value" class="header__cart--value">{{ cart.total_price | money }}</span>
-      <a href="{{ routes.cart_url }}" class="header__cart--wrapper header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
-         {% render 'icon-cart' %}
-          <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-          {%- if cart != empty -%}
-            <div class="cart-count-bubble">
-              {%- if cart.item_count < 100 -%}
-                <span aria-hidden="true">{{ cart.item_count }}</span>
-              {%- endif -%}
-              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-            </div>
-          {%- endif -%}
-      </a>
-    </div>
-  </header>
-</{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
-
-{%- render 'cart-notification', color_scheme: section.settings.color_scheme -%}
-
-{% javascript %}
-  class StickyHeader extends HTMLElement {
-    constructor() {
-      super();
-    }
-
-    connectedCallback() {
-      this.header = document.getElementById('shopify-section-header');
-      this.headerBounds = {};
-      this.currentScrollTop = 300;
-      this.preventReveal = false;
-
-      this.onScrollHandler = this.onScroll.bind(this);
-      this.hideHeaderOnScrollUp = () => this.preventReveal = true;
-
-      this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
-      window.addEventListener('scroll', this.onScrollHandler, false);
-
-      this.createObserver();
-    }
-
-    disconnectedCallback() {
-      this.removeEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
-      window.removeEventListener('scroll', this.onScrollHandler);
-    }
-
-    createObserver() {
-      let observer = new IntersectionObserver((entries, observer) => {
-        this.headerBounds = entries[0].intersectionRect;
-        observer.disconnect();
-      });
-
-      observer.observe(this.header);
-    }
-
-    onScroll() {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop < this.currentScrollTop && scrollTop > 100) {
-        requestAnimationFrame(this.hide.bind(this));
-      } else if (scrollTop >= this.currentScrollTop) {
-        requestAnimationFrame(this.reveal.bind(this));
-      } else if (scrollTop <= 100) {
-        requestAnimationFrame(this.reset.bind(this));
-      }
-    }
-
-    hide() {
-      this.header.classList.add('shopify-section-header-sticky');
-      this.closeMenuDisclosure();
-      this.closeSearchModal();
-    }
-
-    reveal() {
-      this.header.classList.add('show', 'animate');
-    }
-
-    reset() {
-      this.header.classList.remove('shopify-section-header-sticky', 'show', 'animate');
-    }
-
-    closeMenuDisclosure() {
-      this.disclosures = this.disclosures || this.header.querySelectorAll('details-disclosure');
-      this.disclosures.forEach(disclosure => disclosure.close());
-    }
-
-    closeSearchModal() {
-      this.searchModal = this.searchModal || this.header.querySelector('details-modal');
-      this.searchModal.close(false);
-    }
-  }
-
-  customElements.define('sticky-header', StickyHeader);
-{% endjavascript %}
-
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    {% if section.settings.logo %}
-      {% assign image_size = section.settings.logo.width | append: 'x' %}
-      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
-    {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ shop.url | append: page.url | json }}
-  }
+  </div>
+</div>
+<script>
+  $('.js-search-header-close').click(function(){
+	$('.predictive-results').addClass('hide');
+   
+});
 </script>
 
-{%- if request.page_type == 'index' -%}
-  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
-  <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "WebSite",
-      "name": {{ shop.name | json }},
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {{ potential_action_target | json }},
-        "query-input": "required name=search_term_string"
-      },
-      "url": {{ shop.url | append: page.url | json }}
-    }
-  </script>
-{%- endif -%}
-
 {% schema %}
-{
-  "name": "t:sections.header.name",
-  "settings": [
+  {
+    "name": "Header and menus",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu_link_list",
+        "label": "Menu",
+        "default": "main-menu"
+      },
     {
       "type": "select",
-      "id": "color_scheme",
+      "id": "menu_alignment",
+      "label": "Main menu alignment",
       "options": [
         {
-          "value": "accent-1",
-          "label": "t:sections.header.settings.color_scheme.options__1.label"
-        },
+          "value": "left",
+          "label": "Left"
+        },      
         {
-          "value": "accent-2",
-          "label": "t:sections.header.settings.color_scheme.options__2.label"
-        },
-        {
-          "value": "background-1",
-          "label": "t:sections.header.settings.color_scheme.options__3.label"
-        },
-        {
-          "value": "background-2",
-          "label": "t:sections.header.settings.color_scheme.options__4.label"
-        },
-        {
-          "value": "inverse",
-          "label": "t:sections.header.settings.color_scheme.options__5.label"
+          "value": "center",
+          "label": "Center"
         }
       ],
-      "default": "background-1",
-      "label": "t:sections.header.settings.color_scheme.label"
+      "default": "center"
     },
-    {
-      "type": "image_picker",
-      "id": "logo",
-      "label": "t:sections.header.settings.logo.label"
-    },
-    {
-      "type": "range",
-      "id": "logo_width",
-      "min": 50,
-      "max": 250,
-      "step": 10,
-      "default": 100,
-      "unit": "t:sections.header.settings.logo_width.unit",
-      "label": "t:sections.header.settings.logo_width.label"
-    },
-    {
-      "type": "select",
-      "id": "logo_position",
-      "options": [
-        {
-          "value": "middle-left",
-          "label": "t:sections.header.settings.logo_position.options__1.label"
-        },
-        {
-          "value": "top-left",
-          "label": "t:sections.header.settings.logo_position.options__2.label"
-        },
-        {
-          "value": "top-center",
-          "label": "t:sections.header.settings.logo_position.options__3.label"
-        }
-      ],
-      "default": "middle-left",
-      "label": "t:sections.header.settings.logo_position.label"
-    },
-    {
-      "type": "link_list",
-      "id": "menu",
-      "default": "main-menu",
-      "label": "t:sections.header.settings.menu.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_line_separator",
-      "default": true,
-      "label": "t:sections.header.settings.show_line_separator.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_sticky_header",
-      "default": true,
-      "label": "t:sections.header.settings.enable_sticky_header.label",
-      "info": "t:sections.header.settings.enable_sticky_header.info"
+      {
+        "type": "select",
+        "id": "main_menu_alignment",
+        "label": "Logo alignment",
+        "default": "left-center",
+        "options": [
+          {
+            "value": "left",
+            "label": "Logo left, menu left"
+          },
+          {
+            "value": "left-center",
+            "label": "Logo left, menu center"
+          },
+          {
+            "value": "left-drawer",
+            "label": "Logo left, menu drawer"
+          },
+          {
+            "value": "center-left",
+            "label": "Logo center, menu left"
+          },
+          {
+            "value": "center",
+            "label": "Logo left, menu below"
+          },
+          {
+            "value": "center-drawer",
+            "label": "Logo center, menu drawer"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "header_style",
+        "label": "Header style",
+        "default": "normal",
+        "options": [
+          {
+            "value": "normal",
+            "label": "Normal"
+          },
+          {
+            "value": "sticky",
+            "label": "Sticky"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_index",
+        "label": "Overlay header over homepage",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "sticky_collection",
+        "label": "Overlay header over collection",
+        "info": "(if collection image is enabled)",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "range",
+        "id": "type_navigation_size",
+        "label": "Text size",
+        "default": 18,
+        "min": 12,
+        "max": 40,
+        "unit": "px"
+      },
+      {
+        "type": "checkbox",
+        "id": "type_navigation_style",
+        "label": "Use heading font"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show an announcement"
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Free shipping and returns",
+        "info": "When closed, the announcement will remain closed until the next visit. Change the text to see it again."
+      },
+      {
+        "type": "url",
+        "id": "announcement_link",
+        "label": "Announcement link"
+      },
+      {
+        "type": "checkbox",
+        "id": "announcement_closable",
+        "label": "Allow users to close announcement"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "logo",
+        "name": "Logo",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo"
+          },
+          {
+            "type": "image_picker",
+            "id": "logo-inverted",
+            "label": "White logo",
+            "info": "Used when on top of an image"
+          },
+          {
+            "type": "range",
+            "id": "desktop_logo_width",
+            "label": "Desktop logo width",
+            "default": 200,
+            "min": 100,
+            "max": 400,
+            "step": 10,
+            "unit": "px"
+          },
+          {
+            "type": "range",
+            "id": "mobile_logo_width",
+            "label": "Mobile logo width",
+            "default": 140,
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "info": "Set as a max-width, may appear smaller"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "settings": {}
     }
-  ]
-}
+  }
 {% endschema %}

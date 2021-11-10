@@ -1,135 +1,141 @@
-<link rel="stylesheet" href="{{ 'component-card.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'component-product-grid.css' | asset_url }}" media="print" onload="this.media='all'">
-<link rel="stylesheet" href="{{ 'section-product-recommendations.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- assign recommend_products = true -%}
 
-<noscript>{{ 'component-card.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-price.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'component-product-grid.css' | asset_url | stylesheet_tag }}</noscript>
-<noscript>{{ 'section-product-recommendations.css' | asset_url | stylesheet_tag }}</noscript>
+{% if recommendations.products and recommendations.products_count > 0 %}
+  {%- assign related_collection = recommendations -%}
+{% endif %}
 
-<product-recommendations class="product-recommendations page-width" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
-  {% if recommendations.performed and recommendations.products_count > 0 %}
-    <h2 class="product-recommendations__heading">{{ section.settings.heading | escape }}</h2>
-    <ul class="grid grid--2-col product-grid{% if recommendations.products_count > 3 %} grid--4-col-desktop grid--quarter-max{% else %} grid--{{ recommendations.products_count }}-col-tablet{% endif %}" role="list">
-      {% for recommendation in recommendations.products %}
-        <li class="grid__item">
-          {% render 'product-card',
-            product_card_product: recommendation,
-            media_size: section.settings.image_ratio,
-            show_secondary_image: section.settings.show_secondary_image,
-            add_image_padding: section.settings.add_image_padding,
-            show_vendor: section.settings.show_vendor,
-            show_image_outline: section.settings.show_image_outline,
-            show_rating: section.settings.show_rating
-          %}
-        </li>
-      {% endfor %}
-    </ul>
+{% comment %}
+  Check if the utility tag defines related section
+{% endcomment %}
+{% for tag in product.tags %}
+  {% if tag contains '_related' %}
+    {%- assign include_collection_handle = tag | split: '_' | last -%}
+    {%- assign include_collection = collections[include_collection_handle] -%}
+    {% if include_collection != empty and include_collection.products_count > 0 %}
+      {%- assign related_collection = include_collection -%}
+      {%- assign recommend_products = false -%}
+      {% break %}
+    {% endif %}
   {% endif %}
-</product-recommendations>
+{% endfor %}
 
-{% javascript %}
-  class ProductRecommendations extends HTMLElement {
-    constructor() {
-      super();
+{%- assign number_of_products = section.settings.related_count -%}
+{%- assign per_row = number_of_products -%}
+{%- assign number_of_products_to_fetch = number_of_products | plus: 1 -%}
+{% case per_row %}
+{% when 1 %}
+  {%- assign grid_item_width = '' -%}
+{% when 2 %}
+  {%- assign grid_item_width = 'medium-up--one-half' -%}
+{% when 3 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+{% when 4 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+{% when 5 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+{% when 6 %}
+  {%- assign grid_item_width = 'small--one-half medium-up--one-sixth' -%}
+{% endcase %}
 
-      const handleIntersection = (entries, observer) => {
-        if (!entries[0].isIntersecting) return;
-        observer.unobserve(this);
+{%- if section.settings.show_product_recommendations -%}
+  <div
+    id="Recommendations-{{ product.id }}"
+    data-section-id="{{ product.id }}"
+    data-section-type="product-recommendations"
+    data-enable="{{ recommend_products }}"
+    data-product-id="{{ product.id }}"
+    data-url="{{ routes.product_recommendations_url }}"
+    data-limit="{{ number_of_products_to_fetch }}">
 
-        fetch(this.dataset.url)
-          .then(response => response.text())
-          .then(text => {
-            const html = document.createElement('div');
-            html.innerHTML = text;
-            const recommendations = html.querySelector('product-recommendations');
-            if (recommendations && recommendations.innerHTML.trim().length) {
-              this.innerHTML = recommendations.innerHTML;
-            }
-          })
-          .catch(e => {
-            console.error(e);
-          });
-      }
+    <div
+      data-section-id="{{ product.id }}"
+      data-subsection
+      data-section-type="collection-template"
+      class="index-section">
+      <div class="page-width">
+        <header class="section-header">
+          <h3 class="section-header__title">
+            {{ section.settings.product_recommendations_heading }}
+          </h3>
+        </header>
+      </div>
 
-      new IntersectionObserver(handleIntersection.bind(this), {rootMargin: '0px 0px 200px 0px'}).observe(this);
-    }
-  }
+      <div class="page-width page-width--flush-small">
+        <div class="grid-overflow-wrapper">
+          {% if recommend_products %}
+            <div class="product-recommendations-placeholder">
+              {% comment %}
+                This content is visually hidden and replaced when recommended
+                products show up
+              {% endcomment %}
+              <div class="grid grid--uniform visually-invisible" aria-hidden="true">
+                {% include 'product-grid-item' %}
+              </div>
+            </div>
+          {% endif %}
+          {% if related_collection.products_count > 1 %}
+            <div class="product-recommendations">
+              <div class="product-single__related grid grid--uniform" data-aos="overflow__animation">
+                {%- assign current_product = product -%}
+                {%- assign current_product_found = false -%}
+                {%- assign related_count = 0 -%}
+                {% for product in related_collection.products limit: number_of_products_to_fetch %}
+                  {% if product.handle == current_product.handle %}
+                    {%- assign current_product_found = true -%}
+                  {% else %}
+                    {%- assign related_count = related_count | plus: 1 -%}
+                    {% unless related_count > number_of_products %}
+                      {% if forloop.last and current_product_found %}
+                        {% include 'product-grid-item' %}
+                      {% else %}
+                        {% include 'product-grid-item' %}
+                      {% endif %}
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
+              </div>
 
-  customElements.define('product-recommendations', ProductRecommendations);
-{% endjavascript %}
+              {% if settings.quick_shop_enable %}
+                {% for product in related_collection.products limit: number_of_products_to_fetch %}
+                  {% if product.handle != current_product.handle %}
+                    {% include 'quick-shop-modal' %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
 
 {% schema %}
-{
-  "name": "t:sections.product-recommendations.name",
-  "tag": "section",
-  "settings": [
-    {
-      "type": "paragraph",
-      "content": "t:sections.product-recommendations.settings.paragraph__1.content"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "default": "You may also like",
-      "label": "t:sections.product-recommendations.settings.heading.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.product-recommendations.settings.header__2.content"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.product-recommendations.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.product-recommendations.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.product-recommendations.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.product-recommendations.settings.image_ratio.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_secondary_image",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.show_secondary_image.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "add_image_padding",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.add_image_padding.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_image_outline",
-      "default": true,
-      "label": "t:sections.product-recommendations.settings.show_image_outline.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_vendor",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.show_vendor.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "default": false,
-      "label": "t:sections.product-recommendations.settings.show_rating.label",
-      "info": "t:sections.product-recommendations.settings.show_rating.info"
-    }
-  ]
-}
+  {
+    "name": "Product recommendations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_product_recommendations",
+        "label": "Show dynamic recommendations",
+        "info": "Dynamic recommendations change and improve with time. [Learn more](https://help.shopify.com/en/themes/development/recommended-products)",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "product_recommendations_heading",
+        "label": "Heading",
+        "default": "You may also like"
+      },
+      {
+        "type": "range",
+        "id": "related_count",
+        "label": "Number of related products",
+        "default": 5,
+        "min": 2,
+        "max": 6,
+        "step": 1
+      }
+    ]
+  }
 {% endschema %}

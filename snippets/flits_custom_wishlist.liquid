@@ -1,0 +1,67 @@
+<!--  Flits Wishlist Code Start -->
+    
+     {% assign product_count = product.metafields.Flits.wsl-count %}
+      {% assign customer_meta = customer.metafields.Flits %}
+      {% assign key = 'wishlisted_products' %}
+      {% assign handle_string = customer_meta[key] %}
+      {%- assign  handle_string = handle_string | split:',' %}
+	  {% assign is_product_found = false %}
+      {%- for handle in handle_string -%}
+		{%- if handle == product.handle -%}
+		{% assign btn_text = wishlist_removeFromWishlistButtonText %}
+		{% assign class_text =  "flits-wls-animate flits-wls-active" %}
+		{% assign is_product_found = true %}
+		{%- break -%}
+		{%- endif -%}
+      {%- endfor -%}
+
+      {% if is_product_found == false %}
+      {% assign btn_text = wishlist_addToWishlistButtonText %}
+      {% assign class_text =  "flits-wls-deactivate flits-wls-inactive" %}
+      {% endif%}
+
+      {% assign product_img = product | img_url %}
+      {% assign product_id = 'data-flits-product-id="' | append: product.id | append : '"'  %}
+      {% assign product_title = product.title | escape %}
+	  {% assign product_title = 'data-flits-product-title="' | append: product_title | append : '"'  %}
+      {% assign product_handle = 'data-flits-product-handle="' | append: product.handle | append : '"'  %}
+      {% assign product_image = 'data-flits-product-image="' | append: product_img | append : '"'  %}
+      {% assign customer_id = 'data-flits-customer-id="' | append: customer.id | append : '"'  %}
+      {% assign customer_email = 'data-flits-customer-email="' | append: customer.email | append : '"'  %}
+
+      {% assign product_page = 'data-page=' | append: "product-page"%}
+      {% assign collection_page = 'data-page=' | append: "collection-page"%}
+
+      {% assign data_attribute = product_id  
+	  | append: " " | append: product_title  
+      | append: " " | append: product_handle
+      | append: " " | append: product_image
+      | append: " " | append: customer_id 
+      | append: " " | append: customer_email 
+      %}
+
+      {% comment %} Collection wishlist button HTML {% endcomment %} 
+      <div class="flits-wishlist-colection flits-wishlist-colection-style flits-wishlist-button-style {{ class }}" style="display:none" {{ attr }}>
+	
+        <span class=" flits-wls-button flits-wls-two flits-wls-inactive flits-wls-desktop flits-wls-button-secondary flits-wls-button-full-width" {{data_attribute}} data-tippy-content="{{ btn_text | strip }}">
+          <div class="flits-wls-icon-with-text ">
+            <div class="flits-wls-icon-with-text-icon">
+              <div class="flits-btn-effect">     
+			  	{% render 'flits_capture_code' with 'component',template:'comp_flitsWishlistIcon' class:'heart-full flits-wls-icon-svg icon-svg--size-4 flits-wls-icon-svg-color-blue' %}
+				<div class="flits-wls-effect-group">
+                  <span class="flits-wls-effect"></span>
+                  <span class="flits-wls-effect"></span>
+                  <span class="flits-wls-effect"></span>
+                  <span class="flits-wls-effect"></span>
+                  <span class="flits-wls-effect"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </span>
+        <a class="flits-wls-count-btn">
+          {%- if product_count -%}{{product_count}}{%-else-%}0{%-endif-%}
+        </a>
+      </div>
+    
+    <!-- End -->
