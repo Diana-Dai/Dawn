@@ -1,0 +1,38 @@
+
+/****PLEASE DON'T MAKE CHANGES IN THIS FILE IT'S AFFECT THE CODE IF YOU NEED ANY HELP PLEASE CONTACT TO FLITS TEAM support@getflits.com ****/
+
+.flits-wishlist-colection{
+    z-index: 9 !important;
+  }
+  .flits-wishlist-colection .flits-wls-button {
+    width: 166px !important;
+    height: 28px !important;
+    padding: 4px 0px !important;
+    border-radius: 20px !important;
+  }
+
+.flits-wishlist-colection-style .flits-wls-button-secondary.flits-wls-inactive .flits-wls-icon-svg-color-blue,
+.filts-wishlist-product-style .flits-wls-button-secondary.flits-wls-inactive .flits-wls-icon-svg-color-blue{
+  fill:none!important;
+}
+[data-flits="wishlist-collection-parent"] .product-single__form {
+    margin-bottom: 10px !important;
+  }
+
+.flits-tingle-modal-box__content button.flits-tingle-btn.flits-tingle-primary-btn {
+    background-color: #188842 !important;
+}
+.flits-tingle-modal-box__content button.flits-tingle-btn.flits-tingle-primary-btn:hover{
+	background-color: #188842 !important;
+}
+.flits-tingle-modal-box__content a.flits-tingle-btn.flits-tingle-primary-btn {
+    background-color: #188842 !important;
+}
+.flits-tingle-modal-box__content a.flits-tingle-btn.flits-tingle-primary-btn:hover {
+    background-color: #188842 !important;
+}
+
+.flits-wishlist-colection {
+   position: unset !important;
+	margin-bottom: 10px !important;
+}
