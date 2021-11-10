@@ -1,0 +1,39 @@
+{% for sub_link in links %}
+  {% if sub_link.url == '#' %}{% continue %}{% endif %}
+
+  {%- assign tag_count = tag_count | plus: 1 -%}
+  {% if tag_count == tag_limit %}
+    {%- assign have_extra_tags = true -%}
+    </ul>
+    <div id="TagList-{{ section.id }}" class="collapsible-content collapsible-content--all">
+      <ul class="tags tags--vertical collapsible-content__inner collapsible-content__inner--no-translate">
+  {% endif %}
+  <li>
+    {% assign sub_achorList = sub_link.url | split: '/' %}
+    {% assign sub_achorPoint = sub_achorList | last | strip %}
+    <a href="#{{ sub_achorPoint }}" class="main-link {% if forloop.first == true %}active{% endif %}">
+      {{ sub_link.title }}
+    </a>
+
+    {% if sub_link.links != blank %}
+      <div class="collapse">
+        <ul>
+          {% for sub_sub_link in sub_link.links %}
+            <li>
+              {%- comment -%}Nested links{%- endcomment -%}
+              {% assign sub_sub_anchorlist = sub_sub_link.url | split: '/' %}
+              {% assign sub_sub_anchorPoint = sub_sub_anchorlist | last | strip %}
+
+              <a class="collapse-link {% if forloop.index == 1 %}active{% endif %}" href="#{{ sub_sub_anchorPoint }}">{{ sub_sub_link.title }}</a>
+              {% if forloop.last == false %}
+              <div class="market-sidebar__menu-item-spacer"></div>
+              <div class="market-sidebar__menu-item-spacer"></div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div> 
+    {% endif %}
+
+  </li>
+{% endfor %}
